@@ -23,6 +23,7 @@ Run the IRIS container with your project:
 
 ```
 $ docker-compose up -d
+```
 
 ## How to Use it
 ### Start the InterSystems IRIS Production
