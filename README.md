@@ -72,7 +72,7 @@ kafka-console-producer.sh --topic cctransactions --bootstrap-server localhost:90
 ##### Shell 4 
 Consume events from a topic
 ```
-bin/kafka-console-consumer.sh --topic agentworklist --bootstrap-server localhost:9092
+kafka-console-consumer.sh --topic agentworklist --bootstrap-server localhost:9092
 ```
 
 ### Start the InterSystems IRIS Production
@@ -84,3 +84,18 @@ The default account _SYSTEM / SYS will need to be changed at first login.
 Start the Production [KafkaBank.Stream.Production](http://localhost:52773/csp/kafkabank/EnsPortal.ProductionConfig.zen?PRODUCTION=KafkaBank.Stream.Production) by clicking the "Start" button.
 
 This Production consumes messages from the _"cctransactions"_ topic, processes the message and produces an output to the _"agentworklist"_ topic.
+
+```
+  {  "transdatetime": "2020-06-21 12:14:25", "cc_num": "2291163933867244", "merchant": "fraud_Kirlin and Sons", "category": "personal_care", "amt": 2.86, "first": "Jeff", "last": "Elliott", "gender": "M", "street": "351 Darlene Green", "city": "Columbia", "state": "SC", "zip": "29209", "lat": 33.9659, "long": -80.9355, "city_pop": 333497, "job": "Mechanical engineer", "dob": "1968-03-19", "trans_num": "2da90c7d74bd46a0caf3777415b3ebd3", "unix_time": "1371816865", "merch_lat": 33.986391, "merch_long": -81.200714, "is_fraud": true }
+```
+```  { "transdatetime": "2019-01-01 00:00:18", "cc_num": "2703186189652095", "merchant": "fraud_Rippin, Kub and Mann", "category": "misc_net", "amt": 4.97, "first": "Jennifer", "last": "Banks", "gender": "F", "street": "561 Perry Cove", "city": "Moravian Falls", "state": "NC", "zip": "28654", "lat": 36.0788, "long": -81.1781, "city_pop": 3495, "job": "Psychologist, counselling", "dob": "1988-03-09", "trans_num": "0b242abb623afc578575680df30655b9", "unix_time": "1325376018", "merch_lat": 36.011293, "merch_long": -82.048315, "is_fraud": true }
+```
+```
+  { "transdatetime": "2019-01-01 00:00:44", "cc_num": "630423337322", "merchant": "fraud_Heller, Gutmann and Zieme", "category": "grocery_pos", "amt": 107.23, "first": "Stephanie", "last": "Gill", "gender": "F", "street": "43039 Riley Greens Suite 393", "city": "Orient", "state": "WA", "zip": "99160", "lat": 48.8878, "long": -118.2105, "city_pop": 149, "job": "Special educational needs teacher", "dob": "1978-06-21", "trans_num": "1f76529f8574734946361c461b024d99", "unix_time": "1325376044", "merch_lat": 49.159046999999994, "merch_long": -118.186462, "is_fraud": true }
+```
+```
+  { "transdatetime": "2019-01-01 00:00:51", "cc_num": "38859492057661", "merchant": "fraud_Lind-Buckridge", "category": "entertainment", "amt": 220.11, "first": "Edward", "last": "Sanchez", "gender": "M", "street": "594 White Dale Suite 530", "city": "Malad City", "state": "ID", "zip": "83252", "lat": 42.1808, "long": -112.262, "city_pop": 4154, "job": "Nature conservation officer", "dob": "1962-01-19", "trans_num": "a1a22d70485983eac12b5b88dad1cf95", "unix_time": "1325376051", "merch_lat": 43.150704, "merch_long": -112.154481, "is_fraud": true }
+```
+```
+  { "transdatetime": "2019-01-01 00:01:16", "cc_num": "3534093764340240", "merchant": "fraud_Kutch, Hermiston and Farrell", "category": "gas_transport", "amt": 45, "first": "Jeremy", "last": "White", "gender": "M", "street": "9443 Cynthia Court Apt. 038", "city": "Boulder", "state": "MT", "zip": "59632", "lat": 46.2306, "long": -112.1138, "city_pop": 1939, "job": "Patent attorney", "dob": "1967-01-12", "trans_num": "6b849c168bdad6f867558c3793159a81", "unix_time": "1325376076", "merch_lat": 47.034331, "merch_long": -112.561071, "is_fraud": true }
+```
