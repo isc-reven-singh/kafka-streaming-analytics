@@ -85,10 +85,15 @@ Start the Production [KafkaBank.Stream.Production](http://localhost:52773/csp/ka
 
 This Production consumes messages from the _"cctransactions"_ topic, processes the message and produces an output to the _"agentworklist"_ topic.
 
+
+Go back to the **Shell 3**
+Then generate credit card transaction events, one line at a time. After each event is produced, the [KafkaBank.Stream.Production](http://localhost:52773/csp/kafkabank/EnsPortal.ProductionConfig.zen?PRODUCTION=KafkaBank.Stream.Production) consumes the message and the outut will be visible on **Shell 4** as well as in the Management Portal (Select any of the components of the production by clicking once -> On the right hand pane, select the "Messages" tab, then any of the messages in the list to explore them in depth)
+
 ```
-  {  "transdatetime": "2020-06-21 12:14:25", "cc_num": "2291163933867244", "merchant": "fraud_Kirlin and Sons", "category": "personal_care", "amt": 2.86, "first": "Jeff", "last": "Elliott", "gender": "M", "street": "351 Darlene Green", "city": "Columbia", "state": "SC", "zip": "29209", "lat": 33.9659, "long": -80.9355, "city_pop": 333497, "job": "Mechanical engineer", "dob": "1968-03-19", "trans_num": "2da90c7d74bd46a0caf3777415b3ebd3", "unix_time": "1371816865", "merch_lat": 33.986391, "merch_long": -81.200714, "is_fraud": true }
+{ "transdatetime": "2020-06-21 12:14:25", "cc_num": "2291163933867244", "merchant": "fraud_Kirlin and Sons", "category": "personal_care", "amt": 2.86, "first": "Jeff", "last": "Elliott", "gender": "M", "street": "351 Darlene Green", "city": "Columbia", "state": "SC", "zip": "29209", "lat": 33.9659, "long": -80.9355, "city_pop": 333497, "job": "Mechanical engineer", "dob": "1968-03-19", "trans_num": "2da90c7d74bd46a0caf3777415b3ebd3", "unix_time": "1371816865", "merch_lat": 33.986391, "merch_long": -81.200714, "is_fraud": true }
 ```
-```  { "transdatetime": "2019-01-01 00:00:18", "cc_num": "2703186189652095", "merchant": "fraud_Rippin, Kub and Mann", "category": "misc_net", "amt": 4.97, "first": "Jennifer", "last": "Banks", "gender": "F", "street": "561 Perry Cove", "city": "Moravian Falls", "state": "NC", "zip": "28654", "lat": 36.0788, "long": -81.1781, "city_pop": 3495, "job": "Psychologist, counselling", "dob": "1988-03-09", "trans_num": "0b242abb623afc578575680df30655b9", "unix_time": "1325376018", "merch_lat": 36.011293, "merch_long": -82.048315, "is_fraud": true }
+```  
+{ "transdatetime": "2019-01-01 00:00:18", "cc_num": "2703186189652095", "merchant": "fraud_Rippin, Kub and Mann", "category": "misc_net", "amt": 4.97, "first": "Jennifer", "last": "Banks", "gender": "F", "street": "561 Perry Cove", "city": "Moravian Falls", "state": "NC", "zip": "28654", "lat": 36.0788, "long": -81.1781, "city_pop": 3495, "job": "Psychologist, counselling", "dob": "1988-03-09", "trans_num": "0b242abb623afc578575680df30655b9", "unix_time": "1325376018", "merch_lat": 36.011293, "merch_long": -82.048315, "is_fraud": true }
 ```
 ```
   { "transdatetime": "2019-01-01 00:00:44", "cc_num": "630423337322", "merchant": "fraud_Heller, Gutmann and Zieme", "category": "grocery_pos", "amt": 107.23, "first": "Stephanie", "last": "Gill", "gender": "F", "street": "43039 Riley Greens Suite 393", "city": "Orient", "state": "WA", "zip": "99160", "lat": 48.8878, "long": -118.2105, "city_pop": 149, "job": "Special educational needs teacher", "dob": "1978-06-21", "trans_num": "1f76529f8574734946361c461b024d99", "unix_time": "1325376044", "merch_lat": 49.159046999999994, "merch_long": -118.186462, "is_fraud": true }
