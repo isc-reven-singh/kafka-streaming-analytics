@@ -9,20 +9,20 @@ A demonstration of how to use InterSystems IRIS Data Platform, to consume messag
 Clone/git pull the repo into any local directory
 
 ```
-$ git clone https://github.com/isc-reven-singh/kafka-streaming-analytics.git
+git clone https://github.com/isc-reven-singh/kafka-streaming-analytics.git
 ```
 
 Open the terminal in this directory and run:
 
 ```
-$ docker-compose build
+docker-compose build
 ```
 Among other things, iris.script which is called by the installer, compiles the required classes for this demo and sets up the analytics components.
 
 Run the IRIS container with your project:
 
 ```
-$ docker-compose up -d
+docker-compose up -d
 ```
 
 ## How to Use it
