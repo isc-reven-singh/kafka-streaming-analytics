@@ -15,6 +15,7 @@ git clone https://github.com/isc-reven-singh/kafka-streaming-analytics.git
 Open the terminal in this directory and run:
 
 ```
+cd kafka-streaming-analytics
 docker-compose build
 ```
 Among other things, iris.script which is called by the installer, compiles the required classes for this demo and sets up the analytics components.
