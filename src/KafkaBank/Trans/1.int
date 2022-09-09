@@ -1,0 +1,1402 @@
+ROUTINE KafkaBank.Trans.1 [Type=INT,Generated]
+ ;KafkaBank.Trans.1
+ ;Generated for class KafkaBank.Trans.  Do NOT edit. 09/07/2022 10:37:16AM
+ ;;7A59514D;KafkaBank.Trans
+ ;
+SQLUPPER(v,l) { quit $zu(28,v,7,$g(l,32767)) }
+ALPHAUP(v,r) { quit $zu(28,v,6) }
+STRING(v,l) { quit $zu(28,v,9,$g(l,32767)) }
+SQLSTRING(v,l) { quit $zu(28,v,8,$g(l,32767)) }
+UPPER(v) { quit $zu(28,v,5) }
+MVR(v) { quit $zu(28,v,2) }
+TRUNCATE(v,l) { quit $e(v,1,$g(l,3641144)) }
+%BuildDeferredIndices(lockFlag=0,journalFlag=1) public {
+	return $$Error^%apiOBJ(5758,"%Storage.Persistent::%BuildDeferredIndices") }
+%BuildIndices(pIndexList="",pAutoPurge=1,pLockFlag=0,pJournalFlag="",pStartID="",pEndID="",pIgnoreIndexList="") public {
+	If (pIndexList="")||(($listlength(pIndexList)=1)&&($listget(pIndexList,1)="")) { Quit 1 }
+	Quit $$Error^%apiOBJ(5066,$classname()_"::"_$ListToString(pIndexList)) }
+%BuildIndicesSegment(pStartID,pEndID,pIndexHandle=0,pLockFlag=1,pFirstRange=0,pJob="") public {
+	QUIT 1 }
+%CheckConstraints(pID,pConstraintList="",pCheckDisabled=0,pErrorInfo) public {
+	if (''..%OnDetermineClass($select(pID="":"",1:$listbuild(pID_"")),.tMSTC)) && (tMSTC '= $classname()) { quit $classmethod(tMSTC,"%CheckConstraints",pID,pConstraintList) } else { quit 1 } }
+%CheckConstraintsForExtent(pConstraintList="",pCheckDisabled=0,pErrorLog) [ SQLCODE,tID ] public { New %ROWCOUNT,%ROWID,%msg,SQLCODE,tID 
+	kill pErrorLog set tStatusAll = 1, pErrorLog = 0 if '$listvalid(pConstraintList) { set pConstraintList = $listfromstring(pConstraintList) }
+	 ;---&sql(declare ext cursor for select %ID into :tID FROM KafkaBank.Trans)
+ 	 ;--- ** SQL PUBLIC Variables: %ROWCOUNT, %ROWID, %msg, SQLCODE, tID
+	 
+	 ;---&sql(open ext)
+	if $g(%ext0290)'="" { s SQLCODE=-101 } else { try { s %ext0290="%sqlcq."_$tr($namespace,"%_-$@:/\[]^ .","pudssssssssss")_".xE2hrlgBqJpBQwSt1UDeYiHFFJPL",%ext0290=$classmethod(%ext0290,"%New") } catch { if ($ze'["<CLASS DOES NOT EXIST>"||($ze'[%ext0290)),$ze'["<ZSQLU>" { throw } } if '$isobject(%ext0290) { s %ext0290=$$%0dsqlA() } }
+	if SQLCODE '< 0 {
+		for {
+			 ;---&sql(fetch ext)
+ 			 ;--- ** SQL PUBLIC Variables: %ROWCOUNT, %ROWID, %msg, SQLCODE
+			if $isobject($g(%ext0290))'=1 { s SQLCODE=-102 } else { do %ext0290.FET() }
+			if SQLCODE { if SQLCODE=100 { quit } elseif SQLCODE<0 { set tStatusAll = $select(+tStatusAll:$$Error^%apiOBJ(5521,SQLCODE,$Get(%msg)),1:$$AppendStatus^%occSystem(tStatusAll,$$Error^%apiOBJ(5521,SQLCODE,$Get(%msg)))) quit } }
+			set tStatus = ..%CheckConstraints(tID,pConstraintList,pCheckDisabled,.tErrorInfo)
+			if ('tStatus) { set tStatusAll = $select(+tStatusAll:tStatus,1:$$AppendStatus^%occSystem(tStatusAll,tStatus)) set:pErrorLog<1000 pErrorLog = pErrorLog + 1, pErrorLog(pErrorLog) = tErrorInfo _ $Listbuild(tStatus) }
+		}
+		 ;---&sql(close ext)
+		if '$isobject($get(%ext0290)) { set SQLCODE=-102 } else { set SQLCODE=0 kill %ext0290 }
+	}
+	quit tStatusAll }
+ q
+%0dsqlA()	n %xxsql,%xxoref
+	s %xxsql("S",1)="DECLARE ext CURSOR FOR SELECT %ID INTO :tID FROM KafkaBank . Trans"
+	s %xxsql("M","%occSqlfuncinc")=$c(1),%xxsql("I","%PVA")="",%xxsql("I","%callout")="",%xxsql("I","%jsonMap")="",%xxsql("I","%occSqlfunc")=""
+	s %xxsql("I","%systemInclude")="",%xxsql("NS")="KAFKABANK",%xxsql("PToolsCTI")=$LB(,"-1:0:0::0:1")
+	s %xxoref=$$BuildQuery^%SYS.SQLSRV(.%xxsql,$lb("Logical","","","KafkaBank",0,"",),",0,ext,","KafkaBank.Trans.CLS",1)
+	i $g(SQLCODE) s tID=""
+	q %xxoref
+%ComposeOid(id) public {
+	set tCLASSNAME = $listget($g(^KafkaBank.TransD(id)),1)
+	if tCLASSNAME="" { quit $select(id="":"",1:$listbuild(id_"","KafkaBank.Trans")) }
+	set tClass=$piece(tCLASSNAME,$extract(tCLASSNAME),*-1)
+	set:tClass'["." tClass="User."_tClass
+	quit $select(id="":"",1:$listbuild(id_"",tClass)) }
+%Delete(oid="",concurrency=-1) public {
+	RETURN:oid="" $$Error^%apiOBJ(5813,$classname())
+	set id=$listget(oid) RETURN:id="" $$Error^%apiOBJ(5812,$classname())
+	set traninit=0
+	set $zt="%DeleteERR"
+	if concurrency = -1 { set concurrency=$zu(115,10) }
+	if (concurrency > 4) || (concurrency < 0) || (concurrency '= (concurrency\1)) { RETURN $$Error^%apiOBJ(5828) }
+	set class=$listget(oid,2)
+	if class="" { set sc=..%OnDetermineClass(oid,.class) RETURN:('sc) sc set oid=$select(oid="":"",1:$listbuild($listget(oid),class)_$select($listget(oid,3)'="":$listbuild($list(oid,3)),1:"")) } else { set class=$s(class="":"",class[".":class,$e(class)'="%":"User."_class,1:"%Library."_$e(class,2,*)) }
+	if $classname()'=class { RETURN $classmethod(class,"%Delete",oid,concurrency) }
+	if +$g(%objtxSTATUS)=0 { set traninit=1 k %objtxSTATUS,%objtxLIST,%objtxOIDASSIGNED,%objtxOIDUNASSIGNED,%objtxMODIFIED,%objtxVERSION k:'$TLevel %objtxTID,%objtxID i '$zu(115,9) { s %objtxSTATUS=1 } else { TStart  s %objtxSTATUS=2 } }
+	set gbl=..#DATALOCATIONGLOBAL If gbl="" { Set oref=$zobjoid("",$listget(oid)),sfn=$zu(40,0,41) } Else { Set oref=$zobjoid("",$listget(oid),@gbl,.sfn) } if $isobject(oref)=1 { do oref.%DeleteOID() }
+	set sc=..%DeleteData(id,concurrency)
+	set ^OBJ.DSTIME($classname(),$Get(^OBJ.DSTIME,0),id)=2
+%DeleteEnd if traninit { if (''sc) { i $g(%objtxSTATUS)=1 { k %objtxSTATUS } else { If $Tlevel { TCommit  } k %objtxSTATUS,%objtxLIST,%objtxOIDASSIGNED,%objtxOIDUNASSIGNED,%objtxMODIFIED,%objtxVERSION k:'$TLevel %objtxTID,%objtxID } } else { i $g(%objtxSTATUS)=2 { s sc=$select(+sc:$$%TRollBack^%occTransaction(),1:$$AppendStatus^%occSystem(sc,$$%TRollBack^%occTransaction())) k %objtxTID,%objtxID } else { k %objtxSTATUS } } }
+	RETURN sc
+%DeleteERR	set $zt="",sc=$$Error^%apiOBJ(5002,$ZE)
+	goto %DeleteEnd }
+%DeleteData(id,concurrency) public {
+	Quit:id="" $$Error^%apiOBJ(5812)
+	set $Ztrap="DeleteDataERR" set lockok=0,sc=""
+	If concurrency {
+		Lock +(^KafkaBank.TransD(id)#"E"):$zu(115,4)
+		Set lockok=$s('$t:0,1:$case($SYSTEM.Lock.ReturnCode(),0:1,2:2,4:2,:0))
+		Set:lockok=2&&($tlevel) %0CacheLock($classname(),"E")=1
+		If 'lockok {
+			Quit $$Error^%apiOBJ(5803,$classname())
+		}
+	}
+	If ($Data(^KafkaBank.TransD(id))) {
+		If $data(^oddEXTR($classname())) {
+			Set fc=""
+			For {
+				Set fc=$order(^rINDEXEXT("F",$classname(),"%1","f",fc))
+				Quit:fc=""
+				Set fk=""
+				For {
+					Set fk=$order(^rINDEXEXT("F",$classname(),"%1","f",fc,fk))
+					Quit:fk=""
+					Set sc=$classmethod(fc,fk_"Delete",id)
+					If ('sc) { Goto DeleteDataEXIT }
+				}
+			}
+			Set fc=""
+			For {
+				Set fc=$order(^rINDEXEXT("F",$classname(),"IDKEY","f",fc))
+				Quit:fc=""
+				Set fk=""
+				For {
+					Set fk=$order(^rINDEXEXT("F",$classname(),"IDKEY","f",fc,fk))
+					Quit:fk=""
+					Set sc=$classmethod(fc,fk_"Delete",id)
+					If ('sc) { Goto DeleteDataEXIT }
+				}
+			}
+		}
+		Kill ^KafkaBank.TransD(id)
+		Set sc=1
+	}
+	Else { Set sc=$$Error^%apiOBJ(5810,$classname(),id) }
+DeleteDataEXIT
+	If concurrency,lockok {
+		Lock -(^KafkaBank.TransD(id)#"E")
+	}
+DeleteDataRET	Set $Ztrap = ""
+	QUIT sc
+DeleteDataERR	Set $Ztrap = "DeleteDataRET"
+	Set sc = $$Error^%apiOBJ(5002,$ZE)
+	Goto DeleteDataEXIT }
+%Exists(oid="") public {
+	Quit ..%ExistsId($listget(oid)) }
+%ExistsId(id) public {
+	Try { set tExists = $s(id="":0,$d(^KafkaBank.TransD(id)):1,1:0) } catch tException { set tExists = 0 if '(tException.%IsA("%Exception.SystemException")) { throw tException } elseif tException.Name'="<SUBSCRIPT>" { ZT $ZE } } quit tExists }
+%FileIndices(id,pIndexHandle=0) public {
+	Quit 1 }
+%InsertBatch(objects,concurrency=0,useTransactions=0) public {
+	try {
+		set numerrs=0,errs="",cnt=0,ptr=0
+		while $listnext(objects,ptr,data) {
+			set cnt=cnt+1
+			set lock=0
+			if (useTransactions) tstart
+			set id=$i(^KafkaBank.TransD)
+			try {
+				set tInnerException = ""
+				;
+				if concurrency { lock +(^KafkaBank.TransD(id)#"E"):$zu(115,4) set lock=$s('$t:0,1:$case($SYSTEM.Lock.ReturnCode(),0:1,2:2,4:2,:0)) set:lock=2&&($tlevel) %0CacheLock($classname(),"E")=1 if 'lock { Throw ##class(%Exception.StatusException).ThrowIfInterrupt($$Error^%apiOBJ(5803,$classname())) } }
+				set ^KafkaBank.TransD(id)=data
+				if (useTransactions) { tcommit }
+				set ^OBJ.DSTIME($classname(),$Get(^OBJ.DSTIME,0),id)=1
+			}
+			catch tInnerException {
+				set newerr=$lb(cnt,tInnerException.AsStatus())
+				if '($length(errs)+$length(newerr)>32767) { set numerrs=numerrs+1, errs=errs_newerr }
+				if (useTransactions) && ($Tlevel) trollback
+			}
+			if lock lock -(^KafkaBank.TransD(id)#"E")
+		}
+	}
+	catch tException {
+		set newerr=$lb($g(cnt),tException.AsStatus())
+		if '($length(errs)+$length(newerr)>32767) { set numerrs=numerrs+1, errs=errs_newerr }
+	}
+	QUIT ($lb(numerrs))_errs }
+%JSONExportInternal() public {
+  Set sc=1
+  Write "{" Set sep=""
+  Set value=..transdatetime
+  If value'="" {
+    Write sep_"""transdatetime"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..ccnum
+  If value'="" {
+    Write sep_"""cc_num"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..merchant
+  If value'="" {
+    Write sep_"""merchant"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..category
+  If value'="" {
+    Write sep_"""category"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..amt
+  If value'="" {
+    Write sep_"""amt"":"_$case($zcvt(value,"U"),"NAN":"""NaN""","-INF":"""-INF""","+INF":"""+INF""","INF":"""INF""",:$select($extract(value)=".":"0"_value,$extract(value,1,2)="-.":"-0."_$extract(value,3,*),1:value))
+    Set $extract(sep,1)=","
+  }
+  Set value=..first
+  If value'="" {
+    Write sep_"""first"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..last
+  If value'="" {
+    Write sep_"""last"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..gender
+  If value'="" {
+    Write sep_"""gender"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..street
+  If value'="" {
+    Write sep_"""street"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..city
+  If value'="" {
+    Write sep_"""city"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..state
+  If value'="" {
+    Write sep_"""state"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..zip
+  If value'="" {
+    Write sep_"""zip"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..lat
+  If value'="" {
+    Write sep_"""lat"":"_$case($zcvt(value,"U"),"NAN":"""NaN""","-INF":"""-INF""","+INF":"""+INF""","INF":"""INF""",:$select($extract(value)=".":"0"_value,$extract(value,1,2)="-.":"-0."_$extract(value,3,*),1:value))
+    Set $extract(sep,1)=","
+  }
+  Set value=..long
+  If value'="" {
+    Write sep_"""long"":"_$case($zcvt(value,"U"),"NAN":"""NaN""","-INF":"""-INF""","+INF":"""+INF""","INF":"""INF""",:$select($extract(value)=".":"0"_value,$extract(value,1,2)="-.":"-0."_$extract(value,3,*),1:value))
+    Set $extract(sep,1)=","
+  }
+  Set value=..citypop
+  If value'="" {
+    Write sep_"""city_pop"":"_value
+    Set $extract(sep,1)=","
+  }
+  Set value=..job
+  If value'="" {
+    Write sep_"""job"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..dob
+  If value'="" {
+    Write sep_"""dob"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..transnum
+  If value'="" {
+    Write sep_"""trans_num"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..unixtime
+  If value'="" {
+    Write sep_"""unix_time"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..merchlat
+  If value'="" {
+    Write sep_"""merch_lat"":"_$case($zcvt(value,"U"),"NAN":"""NaN""","-INF":"""-INF""","+INF":"""+INF""","INF":"""INF""",:$select($extract(value)=".":"0"_value,$extract(value,1,2)="-.":"-0."_$extract(value,3,*),1:value))
+    Set $extract(sep,1)=","
+  }
+  Set value=..merchlong
+  If value'="" {
+    Write sep_"""merch_long"":"_$case($zcvt(value,"U"),"NAN":"""NaN""","-INF":"""-INF""","+INF":"""+INF""","INF":"""INF""",:$select($extract(value)=".":"0"_value,$extract(value,1,2)="-.":"-0."_$extract(value,3,*),1:value))
+    Set $extract(sep,1)=","
+  }
+  Set value=..isfraud
+  If value'="" {
+    Write sep_"""is_fraud"":"_$select(value:"true",1:"false")
+    Set $extract(sep,1)=","
+  }
+  Write "}"
+%JSONExportExit Quit sc }
+%JSONExportToStringInternal() public {
+  Set sc=1
+  Set %export=%export_"{" Set sep=""
+  Set value=..transdatetime
+  If value'="" {
+    Set %export=%export_sep_"""transdatetime"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..ccnum
+  If value'="" {
+    Set %export=%export_sep_"""cc_num"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..merchant
+  If value'="" {
+    Set %export=%export_sep_"""merchant"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..category
+  If value'="" {
+    Set %export=%export_sep_"""category"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..amt
+  If value'="" {
+    Set %export=%export_sep_"""amt"":"_$case($zcvt(value,"U"),"NAN":"""NaN""","-INF":"""-INF""","+INF":"""+INF""","INF":"""INF""",:$select($extract(value)=".":"0"_value,$extract(value,1,2)="-.":"-0."_$extract(value,3,*),1:value))
+    Set $extract(sep,1)=","
+  }
+  Set value=..first
+  If value'="" {
+    Set %export=%export_sep_"""first"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..last
+  If value'="" {
+    Set %export=%export_sep_"""last"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..gender
+  If value'="" {
+    Set %export=%export_sep_"""gender"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..street
+  If value'="" {
+    Set %export=%export_sep_"""street"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..city
+  If value'="" {
+    Set %export=%export_sep_"""city"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..state
+  If value'="" {
+    Set %export=%export_sep_"""state"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..zip
+  If value'="" {
+    Set %export=%export_sep_"""zip"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..lat
+  If value'="" {
+    Set %export=%export_sep_"""lat"":"_$case($zcvt(value,"U"),"NAN":"""NaN""","-INF":"""-INF""","+INF":"""+INF""","INF":"""INF""",:$select($extract(value)=".":"0"_value,$extract(value,1,2)="-.":"-0."_$extract(value,3,*),1:value))
+    Set $extract(sep,1)=","
+  }
+  Set value=..long
+  If value'="" {
+    Set %export=%export_sep_"""long"":"_$case($zcvt(value,"U"),"NAN":"""NaN""","-INF":"""-INF""","+INF":"""+INF""","INF":"""INF""",:$select($extract(value)=".":"0"_value,$extract(value,1,2)="-.":"-0."_$extract(value,3,*),1:value))
+    Set $extract(sep,1)=","
+  }
+  Set value=..citypop
+  If value'="" {
+    Set %export=%export_sep_"""city_pop"":"_value
+    Set $extract(sep,1)=","
+  }
+  Set value=..job
+  If value'="" {
+    Set %export=%export_sep_"""job"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..dob
+  If value'="" {
+    Set %export=%export_sep_"""dob"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..transnum
+  If value'="" {
+    Set %export=%export_sep_"""trans_num"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..unixtime
+  If value'="" {
+    Set %export=%export_sep_"""unix_time"":"""_$select((value=$c(0)):"",1:$zcvt(value,"O","JSON"))_""""
+    Set $extract(sep,1)=","
+  }
+  Set value=..merchlat
+  If value'="" {
+    Set %export=%export_sep_"""merch_lat"":"_$case($zcvt(value,"U"),"NAN":"""NaN""","-INF":"""-INF""","+INF":"""+INF""","INF":"""INF""",:$select($extract(value)=".":"0"_value,$extract(value,1,2)="-.":"-0."_$extract(value,3,*),1:value))
+    Set $extract(sep,1)=","
+  }
+  Set value=..merchlong
+  If value'="" {
+    Set %export=%export_sep_"""merch_long"":"_$case($zcvt(value,"U"),"NAN":"""NaN""","-INF":"""-INF""","+INF":"""+INF""","INF":"""INF""",:$select($extract(value)=".":"0"_value,$extract(value,1,2)="-.":"-0."_$extract(value,3,*),1:value))
+    Set $extract(sep,1)=","
+  }
+  Set value=..isfraud
+  If value'="" {
+    Set %export=%export_sep_"""is_fraud"":"_$select(value:"true",1:"false")
+    Set $extract(sep,1)=","
+  }
+  Set %export=%export_"}"
+%JSONExportExitToString Quit sc }
+%JSONImportInternal() public {
+  Set sc=1
+  Set testInvalidField=1
+  Set proplist("transdatetime")=""
+  Set field="transdatetime" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..transdatetime=""
+    } Else {
+      If jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject.transdatetime
+      If ('$s(($l(data)'>50):1,1:$$Error^%apiOBJ(7201,data,50))) Goto %JSONImportError
+      If data="" Set data=$c(0)
+      Set ..transdatetime=data
+    }
+  }
+  Set proplist("cc_num")=""
+  Set field="cc_num" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..ccnum=""
+    } Else {
+      If jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject."cc_num"
+      If ('$s(($l(data)'>50):1,1:$$Error^%apiOBJ(7201,data,50))) Goto %JSONImportError
+      If data="" Set data=$c(0)
+      Set ..ccnum=data
+    }
+  }
+  Set proplist("merchant")=""
+  Set field="merchant" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..merchant=""
+    } Else {
+      If jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject.merchant
+      If ('$s(($l(data)'>50):1,1:$$Error^%apiOBJ(7201,data,50))) Goto %JSONImportError
+      If data="" Set data=$c(0)
+      Set ..merchant=data
+    }
+  }
+  Set proplist("category")=""
+  Set field="category" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..category=""
+    } Else {
+      If jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject.category
+      If ('$s(($l(data)'>50):1,1:$$Error^%apiOBJ(7201,data,50))) Goto %JSONImportError
+      If data="" Set data=$c(0)
+      Set ..category=data
+    }
+  }
+  Set proplist("amt")=""
+  Set field="amt" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..amt=""
+    } Else {
+      If jsontype'="number",jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject.amt
+      Set data=$select($isvaliddouble(data):$double(data),1:"") Goto:data="" %JSONImportError If ('$select($zu(115,13)&&(data=$c(0)):1,$isvaliddouble(data,,,):1,1:$$Error^%apiOBJ(5794,"%Double",data))) Goto %JSONImportError
+      Set ..amt=data
+    }
+  }
+  Set proplist("first")=""
+  Set field="first" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..first=""
+    } Else {
+      If jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject.first
+      If ('$s(($l(data)'>50):1,1:$$Error^%apiOBJ(7201,data,50))) Goto %JSONImportError
+      If data="" Set data=$c(0)
+      Set ..first=data
+    }
+  }
+  Set proplist("last")=""
+  Set field="last" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..last=""
+    } Else {
+      If jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject.last
+      If ('$s(($l(data)'>50):1,1:$$Error^%apiOBJ(7201,data,50))) Goto %JSONImportError
+      If data="" Set data=$c(0)
+      Set ..last=data
+    }
+  }
+  Set proplist("gender")=""
+  Set field="gender" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..gender=""
+    } Else {
+      If jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject.gender
+      If ('$s(($l(data)'>50):1,1:$$Error^%apiOBJ(7201,data,50))) Goto %JSONImportError
+      If data="" Set data=$c(0)
+      Set ..gender=data
+    }
+  }
+  Set proplist("street")=""
+  Set field="street" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..street=""
+    } Else {
+      If jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject.street
+      If ('$s(($l(data)'>50):1,1:$$Error^%apiOBJ(7201,data,50))) Goto %JSONImportError
+      If data="" Set data=$c(0)
+      Set ..street=data
+    }
+  }
+  Set proplist("city")=""
+  Set field="city" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..city=""
+    } Else {
+      If jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject.city
+      If ('$s(($l(data)'>50):1,1:$$Error^%apiOBJ(7201,data,50))) Goto %JSONImportError
+      If data="" Set data=$c(0)
+      Set ..city=data
+    }
+  }
+  Set proplist("state")=""
+  Set field="state" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..state=""
+    } Else {
+      If jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject.state
+      If ('$s(($l(data)'>50):1,1:$$Error^%apiOBJ(7201,data,50))) Goto %JSONImportError
+      If data="" Set data=$c(0)
+      Set ..state=data
+    }
+  }
+  Set proplist("zip")=""
+  Set field="zip" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..zip=""
+    } Else {
+      If jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject.zip
+      If ('$s(($l(data)'>50):1,1:$$Error^%apiOBJ(7201,data,50))) Goto %JSONImportError
+      If data="" Set data=$c(0)
+      Set ..zip=data
+    }
+  }
+  Set proplist("lat")=""
+  Set field="lat" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..lat=""
+    } Else {
+      If jsontype'="number",jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject.lat
+      Set data=$select($isvaliddouble(data):$double(data),1:"") Goto:data="" %JSONImportError If ('$select($zu(115,13)&&(data=$c(0)):1,$isvaliddouble(data,,,):1,1:$$Error^%apiOBJ(5794,"%Double",data))) Goto %JSONImportError
+      Set ..lat=data
+    }
+  }
+  Set proplist("long")=""
+  Set field="long" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..long=""
+    } Else {
+      If jsontype'="number",jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject.long
+      Set data=$select($isvaliddouble(data):$double(data),1:"") Goto:data="" %JSONImportError If ('$select($zu(115,13)&&(data=$c(0)):1,$isvaliddouble(data,,,):1,1:$$Error^%apiOBJ(5794,"%Double",data))) Goto %JSONImportError
+      Set ..long=data
+    }
+  }
+  Set proplist("city_pop")=""
+  Set field="city_pop" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..citypop=""
+    } Else {
+      If jsontype'="number" Goto %JSONImportError
+      Set data=%JSONObject."city_pop"
+      Set data=$s($tr(data,"Ee(),.")'=data:"",1:$number(data,"I")) Goto:data="" %JSONImportError If ('$select(data=$c(0)&&$zu(115,13):1,$isvalidnum(data,0):1,1:$$Error^%apiOBJ(7207,data))) Goto %JSONImportError
+      Set ..citypop=data
+    }
+  }
+  Set proplist("job")=""
+  Set field="job" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..job=""
+    } Else {
+      If jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject.job
+      If ('$s(($l(data)'>50):1,1:$$Error^%apiOBJ(7201,data,50))) Goto %JSONImportError
+      If data="" Set data=$c(0)
+      Set ..job=data
+    }
+  }
+  Set proplist("dob")=""
+  Set field="dob" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..dob=""
+    } Else {
+      If jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject.dob
+      If ('$s(($l(data)'>50):1,1:$$Error^%apiOBJ(7201,data,50))) Goto %JSONImportError
+      If data="" Set data=$c(0)
+      Set ..dob=data
+    }
+  }
+  Set proplist("trans_num")=""
+  Set field="trans_num" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..transnum=""
+    } Else {
+      If jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject."trans_num"
+      If ('$s(($l(data)'>50):1,1:$$Error^%apiOBJ(7201,data,50))) Goto %JSONImportError
+      If data="" Set data=$c(0)
+      Set ..transnum=data
+    }
+  }
+  Set proplist("unix_time")=""
+  Set field="unix_time" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..unixtime=""
+    } Else {
+      If jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject."unix_time"
+      If ('$s(($l(data)'>50):1,1:$$Error^%apiOBJ(7201,data,50))) Goto %JSONImportError
+      If data="" Set data=$c(0)
+      Set ..unixtime=data
+    }
+  }
+  Set proplist("merch_lat")=""
+  Set field="merch_lat" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..merchlat=""
+    } Else {
+      If jsontype'="number",jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject."merch_lat"
+      Set data=$select($isvaliddouble(data):$double(data),1:"") Goto:data="" %JSONImportError If ('$select($zu(115,13)&&(data=$c(0)):1,$isvaliddouble(data,,,):1,1:$$Error^%apiOBJ(5794,"%Double",data))) Goto %JSONImportError
+      Set ..merchlat=data
+    }
+  }
+  Set proplist("merch_long")=""
+  Set field="merch_long" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..merchlong=""
+    } Else {
+      If jsontype'="number",jsontype'="string" Goto %JSONImportError
+      Set data=%JSONObject."merch_long"
+      Set data=$select($isvaliddouble(data):$double(data),1:"") Goto:data="" %JSONImportError If ('$select($zu(115,13)&&(data=$c(0)):1,$isvaliddouble(data,,,):1,1:$$Error^%apiOBJ(5794,"%Double",data))) Goto %JSONImportError
+      Set ..merchlong=data
+    }
+  }
+  Set proplist("is_fraud")=""
+  Set field="is_fraud" Set jsontype=$CASE(%JSONObject.%GetTypeCodeOf(field),0:"null",1:"boolean",2:"boolean",3:"number",4:"number",6:"array",7:"object",8:"string",9:"number",10:"string",11:"number",12:"oref",13:"unassigned",14:"number",15:"number",16:"string",18:"number",19:"number",20:"string",31:"unassigned",:"UNKNOWN")
+  If jsontype'="unassigned" {
+    If (jsontype="string")&&(%JSONObject.%Get(field)="") Set jsontype="null"
+    If jsontype="null" {
+      Set ..isfraud=""
+    } Else {
+      If jsontype'="boolean" Goto %JSONImportError
+      Set ..isfraud=%JSONObject."is_fraud"
+    }
+  }
+  If $get(testInvalidField) {
+    Set invalid=0,iterator=%JSONObject.%GetIterator()
+    While iterator.%GetNext(.key,.value) { If $data(proplist(key))=0 Set invalid=1 Quit  }
+    If invalid Quit $$Error^%apiOBJ(9404,key,$select(%mappingName="":"class base",1:%mappingName))
+  }
+%JSONImportExit Quit sc
+%JSONImportError Quit $$Error^%apiOBJ(9406,field,$select(%mappingName="":"class base",1:%mappingName)) }
+%JSONNew(dynamicObject,containerOref="") public {
+  Quit ##class(KafkaBank.Trans).%New()
+}
+%KillExtent(pDirect=1,killstreams=0) public {
+	set CLASS=$zconvert($classname(),"u"),SUBEXTENT=$order(^rINDEXEXT("S",CLASS,""),1,extentMD) While SUBEXTENT'="" { set subextent = $lg(extentMD,2) if $system.CLS.IsMthd(subextent,"%KillExtent") { Set sc=$select(killstreams:$classmethod(subextent,"%KillExtent",.pDirect,1),1:$classmethod(subextent,"%KillExtent",.pDirect)) If ('sc) { Goto Exit } } Set SUBEXTENT=$order(^rINDEXEXT("S",CLASS,SUBEXTENT),1,extentMD) }
+	set sc=..%PurgeIndices()
+	If (''sc) { Set sc=$select(killstreams:..%KillExtentData(1),1:..%KillExtentData()) }
+	if pDirect { kill ^OBJ.DSTIME($classname()) }
+Exit	RETURN sc }
+%KillExtentData(killstreams=0)
+	Set $sequence(^KafkaBank.TransD)=""
+	If killstreams Set $sequence(^KafkaBank.TransS)="" Kill ^KafkaBank.TransS
+	Kill ^KafkaBank.TransD
+	Quit 1
+%LoadData(id) public {
+	New %s1
+	set $ZTrap="CatchError",locked=0,userze=$ze,$ze=""
+	If i%%Concurrency=4 {
+		Lock +(^KafkaBank.TransD(id)#"E"):$zu(115,4)
+		if '$t do init s i%%Concurrency=0 s:$ze="" $ze=userze return $$Error^%apiOBJ(5803,$classname())
+	} ElseIf i%%Concurrency>1 {
+		Lock +(^KafkaBank.TransD(id)#"SE"):$zu(115,4)
+		if '$t do init s i%%Concurrency=0 s:$ze="" $ze=userze return $$Error^%apiOBJ(5804,$classname())
+		set locked = 1
+	}
+	If $d(^KafkaBank.TransD(id),%s1)#2 {
+		If i%%Concurrency=2 { Lock -(^KafkaBank.TransD(id)#"SIE") }
+		S i%transdatetime=$lg(%s1,2),i%ccnum=$lg(%s1,3),i%merchant=$lg(%s1,4),i%category=$lg(%s1,5),i%amt=$lg(%s1,6),i%first=$lg(%s1,7),i%last=$lg(%s1,8)
+		Set iscpos=$l($li(%s1,1,8))+1,isctmp=$li($e(%s1,iscpos,*),1,8),i%gender=$lg(isctmp),i%street=$lg(isctmp,2),i%city=$lg(isctmp,3),i%state=$lg(isctmp,4),i%zip=$lg(isctmp,5),i%lat=$lg(isctmp,6),i%long=$lg(isctmp,7),i%citypop=$lg(isctmp,8)
+		S isctmp=$e(%s1,iscpos+$l(isctmp),*),i%job=$lg(isctmp),i%dob=$lg(isctmp,2),i%transnum=$lg(isctmp,3),i%unixtime=$lg(isctmp,4),i%merchlat=$lg(isctmp,5),i%merchlong=$lg(isctmp,6),i%isfraud=$lg(isctmp,7)
+		s:$ze="" $ze=userze
+		Quit 1
+	} Else {
+		If i%%Concurrency=2 { Lock -(^KafkaBank.TransD(id)#"SIE") }
+		do init
+		set sc = $$Error^%apiOBJ(5809,$classname(),id) goto CatchError
+	}
+CatchError	set $ZTrap = "" if $ZE'="" { s sc = $$Error^%apiOBJ(5002,$ZE) }
+	If ($get(locked))&&(i%%Concurrency<3) { Lock -(^KafkaBank.TransD(id)#"SIE") }
+	if '('sc) { set sc=$$Error^%apiOBJ(5809,$classname(),id) }
+	s:$ze="" $ze=userze
+	return sc
+init	Set i%amt="",i%category="",i%ccnum="",i%city="",i%citypop="",i%dob="",i%first="",i%gender="",i%isfraud="",i%job="",i%last="",i%lat="",i%long="",i%merchant="",i%merchlat="",i%merchlong="",i%state="",i%street="",i%transdatetime="",i%transnum="",i%unixtime="",i%zip=""
+	quit }
+%LoadDataFromMemory(id,objstate,obj) public {
+	New %s1
+	If $d(objstate(id)) {
+		Set %s1=$g(objstate(id))
+		S i%transdatetime=$lg(%s1,2),i%ccnum=$lg(%s1,3),i%merchant=$lg(%s1,4),i%category=$lg(%s1,5),i%amt=$lg(%s1,6),i%first=$lg(%s1,7),i%last=$lg(%s1,8)
+		Set iscpos=$l($li(%s1,1,8))+1,isctmp=$li($e(%s1,iscpos,*),1,8),i%gender=$lg(isctmp),i%street=$lg(isctmp,2),i%city=$lg(isctmp,3),i%state=$lg(isctmp,4),i%zip=$lg(isctmp,5),i%lat=$lg(isctmp,6),i%long=$lg(isctmp,7),i%citypop=$lg(isctmp,8)
+		S isctmp=$e(%s1,iscpos+$l(isctmp),*),i%job=$lg(isctmp),i%dob=$lg(isctmp,2),i%transnum=$lg(isctmp,3),i%unixtime=$lg(isctmp,4),i%merchlat=$lg(isctmp,5),i%merchlong=$lg(isctmp,6),i%isfraud=$lg(isctmp,7)
+		Quit 1
+	} Else {
+		set i%amt="",i%category="",i%ccnum="",i%city="",i%citypop="",i%dob="",i%first="",i%gender="",i%isfraud="",i%job="",i%last="",i%lat="",i%long="",i%merchant="",i%merchlat="",i%merchlong="",i%state="",i%street="",i%transdatetime="",i%transnum="",i%unixtime="",i%zip=""
+		Quit $$Error^%apiOBJ(5809,$classname(),id)
+	} }
+%LockExtent(shared=0) public {
+	If shared {
+		Lock +(^KafkaBank.TransD#"S"):$zu(115,4) Quit:$t 1
+		Quit $$Error^%apiOBJ(5799,$classname())
+	}
+	Lock +(^KafkaBank.TransD):$zu(115,4) Quit:$t 1
+	Quit $$Error^%apiOBJ(5798,$classname()) }
+%LockId(id,shared=0,timeout) public { s:'($d(timeout)#2) timeout=$zu(115,4)
+	If id="" { Quit $$Error^%apiOBJ(5812) }
+	Set sc=1
+	If 'shared {
+		Lock +(^KafkaBank.TransD(id)#"E"):timeout Quit:$t 1
+		Quit $$Error^%apiOBJ(5803,id_":"_$classname())
+	}
+	Lock +(^KafkaBank.TransD(id)#"SE"):timeout Quit:$t 1
+	Quit $$Error^%apiOBJ(5804,id_":"_$classname()) }
+%NormalizeObject() public {
+	If '$system.CLS.GetModified() Quit 1
+	If m%amt Set:i%amt'="" i%amt=(..amtNormalize(i%amt))
+	If m%category Set:i%category'="" i%category=(..categoryNormalize(i%category))
+	If m%ccnum Set:i%ccnum'="" i%ccnum=(..ccnumNormalize(i%ccnum))
+	If m%city Set:i%city'="" i%city=(..cityNormalize(i%city))
+	If m%citypop Set:i%citypop'="" i%citypop=(..citypopNormalize(i%citypop))
+	If m%dob Set:i%dob'="" i%dob=(..dobNormalize(i%dob))
+	If m%first Set:i%first'="" i%first=(..firstNormalize(i%first))
+	If m%gender Set:i%gender'="" i%gender=(..genderNormalize(i%gender))
+	If m%isfraud Set:i%isfraud'="" i%isfraud=(..isfraudNormalize(i%isfraud))
+	If m%job Set:i%job'="" i%job=(..jobNormalize(i%job))
+	If m%last Set:i%last'="" i%last=(..lastNormalize(i%last))
+	If m%lat Set:i%lat'="" i%lat=(..latNormalize(i%lat))
+	If m%long Set:i%long'="" i%long=(..longNormalize(i%long))
+	If m%merchant Set:i%merchant'="" i%merchant=(..merchantNormalize(i%merchant))
+	If m%merchlat Set:i%merchlat'="" i%merchlat=(..merchlatNormalize(i%merchlat))
+	If m%merchlong Set:i%merchlong'="" i%merchlong=(..merchlongNormalize(i%merchlong))
+	If m%state Set:i%state'="" i%state=(..stateNormalize(i%state))
+	If m%street Set:i%street'="" i%street=(..streetNormalize(i%street))
+	If m%transdatetime Set:i%transdatetime'="" i%transdatetime=(..transdatetimeNormalize(i%transdatetime))
+	If m%transnum Set:i%transnum'="" i%transnum=(..transnumNormalize(i%transnum))
+	If m%unixtime Set:i%unixtime'="" i%unixtime=(..unixtimeNormalize(i%unixtime))
+	If m%zip Set:i%zip'="" i%zip=(..zipNormalize(i%zip))
+	Quit 1 }
+%OnDetermineClass(oid,class) public {
+	Set id=$listget($get(oid))
+	RETURN:id="" $$Error^%apiOBJ(5812)
+	set idclass=$lg($get(^KafkaBank.TransD(id)),1)
+	if idclass="" { set class="KafkaBank.Trans" RETURN 1 }
+	set class=$piece(idclass,"~",*-1)
+	set:class'["." class="User."_class
+	RETURN 1 }
+%PhysicalAddress(id,paddr)
+	if $Get(id)="" Quit $$Error^%apiOBJ(5813,$classname())
+	if (id="") { quit $$Error^%apiOBJ(5832,$classname(),id) }
+	s paddr(1)=$lb($Name(^KafkaBank.TransD(id)),$classname(),"IDKEY","listnode",id)
+	s paddr=1
+	Quit 1
+%PurgeIndices(idxlist="",lockExtent=0,pIgnoreIndexList="") public {
+	If idxlist="" { Quit 1 }
+	Quit $$Error^%apiOBJ(5066,$classname()_"::"_$ListToString(idxlist)) }
+%SQLAcquireLock(%rowid,s=0,unlockref=0)
+	new %d,gotlock
+	set %d(1)=%rowid set s=$e("E",'unlockref)_$e("S",s)
+	lock +^KafkaBank.TransD(%d(1))#s:$zu(115,4) set gotlock=$t
+	if gotlock,'unlockref { set:$case($SYSTEM.Lock.ReturnCode(),2:1,4:1,:0)&&($tlevel) %0CacheLock("KafkaBank.Trans","E")=1 }
+	set:gotlock&&unlockref unlockref=unlockref+1,unlockref(unlockref)=$lb($name(^KafkaBank.TransD(%d(1))),"KafkaBank.Trans",s_"D")
+	QUIT gotlock
+%SQLAcquireTableLock(s=0,SQLCODE,to="")
+	set s=$e("S",s) set:to="" to=$zu(115,4) lock +^KafkaBank.TransD#s:to QUIT:$t 1 set SQLCODE=-110 if s="S" { set %msg=$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler35",,"KafkaBank"_"."_"Trans") } else { set %msg=$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler36",,"KafkaBank"_"."_"Trans") } QUIT 0
+	Return
+%SQLBuildIndices(pIndices="",pLockFlag=0,pStartID="",pEndID="",pIgnoreIndexList="")
+	RETURN ..%BuildIndices(pIndices,,pLockFlag,,pStartID,pEndID,pIgnoreIndexList)
+%SQLBuildPurgeIndexForRow(pIndices="",pActions="BP",pLockRow=1,%d,%e,pIgnoreIndexList="")
+	// Purge and build index nodes for a single row using given values, return Status Code
+	new sn,tSC,tLock set tSC=1,pActions=$zcvt(pActions,"U")
+	try {
+		if $g(%d(1))="" { set tSC=$select(+tSC:$$Error^%apiOBJ(5521,-108,"RowID value must be specified in %d(1) when calling %SQLBuildPurgeIndexForRow for table 'KafkaBank.Trans'"),1:$$AppendStatus^%occSystem(tSC,$$Error^%apiOBJ(5521,-108,"RowID value must be specified in %d(1) when calling %SQLBuildPurgeIndexForRow for table 'KafkaBank.Trans'"))) RETURN tSC }
+		if pLockRow { if '..%SQLAcquireLock(%d(1)) { set tSC=$select(+tSC:$$Error^%apiOBJ(5521,-114,"Unable to lock row in table 'KafkaBank.Trans' with %ID = '"_%d(1)_"'"),1:$$AppendStatus^%occSystem(tSC,$$Error^%apiOBJ(5521,-114,"Unable to lock row in table 'KafkaBank.Trans' with %ID = '"_%d(1)_"'"))) RETURN tSC  } else { set tLock=1 }}
+		if pLockRow { do ..%SQLReleaseLock(%d(1),0,0) set tLock=0 }
+	}
+	catch {
+		if $g(tLock) { do ..%SQLReleaseLock(%d(1),0,0) }
+		set tSC=$select(+tSC:$$Error^%apiOBJ(5594,$ze),1:$$AppendStatus^%occSystem(tSC,$$Error^%apiOBJ(5594,$ze)))
+	}
+	QUIT tSC
+%SQLCheckUniqueIndices(pIndices,pOK)
+	new d,g,n,o set d=0
+	set pOK=1 QUIT
+%SQLCopyIcolIntoName()
+	if %oper="DELETE" {
+		set:$d(%d(1)) %f("ID")=%d(1)
+		QUIT
+	}
+	set:$d(%d(1)) %f("ID")=%d(1) set:$a(%e,2)&&$d(%d(2)) %f("amt")=%d(2) set:$a(%e,3)&&$d(%d(3)) %f("category")=%d(3) set:$a(%e,4)&&$d(%d(4)) %f("ccnum")=%d(4) set:$a(%e,5)&&$d(%d(5)) %f("city")=%d(5) set:$a(%e,6)&&$d(%d(6)) %f("citypop")=%d(6) set:$a(%e,7)&&$d(%d(7)) %f("dob")=%d(7) set:$a(%e,8)&&$d(%d(8)) %f("first")=%d(8) set:$a(%e,9)&&$d(%d(9)) %f("gender")=%d(9) set:$a(%e,10)&&$d(%d(10)) %f("isfraud")=%d(10) set:$a(%e,11)&&$d(%d(11)) %f("job")=%d(11) set:$a(%e,12)&&$d(%d(12)) %f("last")=%d(12) set:$a(%e,13)&&$d(%d(13)) %f("lat")=%d(13) set:$a(%e,14)&&$d(%d(14)) %f("long")=%d(14) set:$a(%e,15)&&$d(%d(15)) %f("merchant")=%d(15) set:$a(%e,16)&&$d(%d(16)) %f("merchlat")=%d(16) set:$a(%e,17)&&$d(%d(17)) %f("merchlong")=%d(17) set:$a(%e,18)&&$d(%d(18)) %f("state")=%d(18) set:$a(%e,19)&&$d(%d(19)) %f("street")=%d(19) set:$a(%e,20)&&$d(%d(20)) %f("transdatetime")=%d(20) set:$a(%e,21)&&$d(%d(21)) %f("transnum")=%d(21) set:$a(%e,22)&&$d(%d(22)) %f("unixtime")=%d(22) set:$a(%e,23)&&$d(%d(23)) %f("zip")=%d(23) set:$a(%e,24)&&$d(%d(24)) %f("x__classname")=%d(24)
+	QUIT
+%SQLDefineiDjVars(%d,subs,master)
+	QUIT
+%SQLDelete(%rowid,%check,%tstart=1,%mv=0,%polymorphic=0)
+	// SQL DELETE method for table KafkaBank.Trans
+	new bva,ce,%d,dc,%e,%ele,%itm,%key,%l,%nc,omcall,%oper,%pos,%s,sn,sqlcode,subs set %oper="DELETE",sqlcode=0,%ROWID=%rowid,%d(1)=%rowid,%e(1)=%rowid,%l=$c(0)
+	if '$d(%0CacheSQLRA) { new %0CacheSQLRA set omcall=1 }
+	if '$a(%check,2) {
+		new %ls lock +^KafkaBank.TransD(%d(1))#"E":$zu(115,4) set %ls=$s('$t:0,1:$case($SYSTEM.Lock.ReturnCode(),0:1,4:2,2:2,1:3,:""))
+		set:%ls=2 $e(%check,2)=$c(1) set:%ls=2&&($tlevel) %0CacheLock("KafkaBank.Trans","E")=1 set:$case(%ls,1:1,2:1,:0) $e(%l)=$c(1)
+		if '%ls||(%ls=3) { set SQLCODE=-110,%msg=$$FormatMessage^%occMessages(,"%SQL.Filer",$s('%ls:"SQLFiler40",1:"SQLFiler55"),,%oper,"KafkaBank"_"."_"Trans",$g(%d(1))) RETURN  }
+	}
+	if %tstart { TSTART:($zu(115,1)=1)||('$TLEVEL&&($zu(115,1)=2))  }
+	set $zt="ERRORDelete"
+	do ..%SQLGetOld(%rowid,.%d,.%e,.sqlcode) if sqlcode { set SQLCODE=-106,%msg=$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler58",,"KafkaBank"_"."_"Trans",%rowid) do ..%SQLEExit() QUIT  }
+	if %e(24)'="" { set sn=$p(%e(24),$e(%e(24)),$l(%e(24),$e(%e(24)))-1) if "KafkaBank.Trans"'=sn { new %f do ..%SQLCopyIcolIntoName() do $classmethod(sn,"%SQLDelete",%rowid,%check,%tstart,%mv,1) QUIT  }}
+	if '$a(%check),'$zu(115,7) do  if sqlcode set SQLCODE=sqlcode do ..%SQLEExit() QUIT  
+	. new %fk,%k,%p,%st,%t,%z set %k="",%p("%1")="%d(1),",%p("IDKEY")="%d(1),"
+	. for  quit:sqlcode<0  set %k=$o(^rINDEXEXT("F","KafkaBank.Trans",%k)) quit:%k=""  set %t="" for  set %t=$o(^rINDEXEXT("F","KafkaBank.Trans",%k,"f",%t)) quit:%t=""  set %st=(%t="KafkaBank.Trans") set %fk="" for  set %fk=$o(^rINDEXEXT("F","KafkaBank.Trans",%k,"f",%t,%fk)) quit:%fk=""  x "set %z=$classmethod(%t,%fk_""SQLFKeyRefAction"",%st,%k,$a(%check,2),"_%p(%k)_")" if %z set sqlcode=-124 quit  
+	set ce="" for  { set ce=$order(^oddSQL("KafkaBank","Trans","DC",ce)) quit:ce=""   do $classmethod(ce,"%SQLDeleteChildren",%d(1),%check,.sqlcode) quit:sqlcode<0  } if sqlcode<0 { set SQLCODE=sqlcode do ..%SQLEExit() QUIT } // Delete any children
+	if '$a(%check,3) {
+	}
+	k ^KafkaBank.TransD(%d(1))
+	set ^OBJ.DSTIME("KafkaBank.Trans",$Get(^OBJ.DSTIME,0),%d(1))=2
+	do ..%SQLUnlock() TCOMMIT:%tstart&&($zu(115,1)=1)
+	set SQLCODE=0 kill:$g(omcall) %0CacheSQLRA
+	QUIT
+ERRORDelete	set $zt="",SQLCODE=-415,%msg=$s($g(%msg)'="":%msg_" -- ",1:"")_$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler51",,%oper,"KafkaBank"_"."_"Trans",$ze) if $ze["<FRAMESTACK>" { set %msg=$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler52",,$ze,%oper,"KafkaBank"_"."_"Trans") do ##Class(%SYS.System).WriteToConsoleLog(%msg) if ($zu(67,10,$j)=1)||($zu(67,10,$j)=3) { write !,%msg h 3 } HALT  } do ..%SQLEExit() QUIT
+	Return
+%SQLDeleteTempStreams()
+	// Delete all temporary streams
+	QUIT
+%SQLEExit()
+	do ..%SQLUnlock() 
+	if %tstart,$zu(115,1)=1,$TLEVEL { set %tstart=0 TROLLBACK 1 } kill:$g(omcall) %0CacheSQLRA QUIT  
+	Return
+%SQLExists(pLockOnly=0,pUnlockRef,%pVal...)
+	// SQL Foreign Key validation entry point for Key %1.  Called by FKeys that reference this Key to see if the row is defined
+	if pLockOnly>=0 { new id set id=%pVal(1) }
+	if pLockOnly>=0 { if '..%SQLGetLock(id,1,.pUnlockRef) { set sqlcode=-114,%msg=$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler39",,"KafkaBank"_"."_"Trans"_":"_"%1") QUIT 0 } }
+	if pLockOnly<1 {
+		new qv set qv=$d(^KafkaBank.TransD(%pVal(1))) QUIT:pLockOnly=-1 qv
+		do:'$g(pUnlockRef) ..%SQLReleaseLock(id,1) quit qv
+	}
+	else { do:'$g(pUnlockRef) ..%SQLReleaseLock(id,1) QUIT 1 }
+	Return
+%SQLGetLock(pRowId,pShared=0,pUnlockRef)
+	QUIT ..%SQLAcquireLock(pRowId,pShared,.pUnlockRef)
+%SQLGetOld(%rowid,%d,%e,sqlcode)
+	new s set %d(1)=%rowid,s="" if '$d(^KafkaBank.TransD(%d(1)),s) { set sqlcode=100 quit  }
+	 S %e(24)=$lg(s)
+	QUIT
+%SQLGetOldAll()
+	new s set %d(1)=%rowid,s="" if '$d(^KafkaBank.TransD(%d(1)),s) { set sqlcode=100 quit  }
+	 S $lg(%e(24),%e(20),%e(4),%e(15),%e(3),%e(2),%e(8),%e(12),%e(9),%e(19),%e(5),%e(18),%e(23),%e(13),%e(14),%e(6),%e(11),%e(7),%e(21),%e(22),%e(16),%e(17),%e(10))=s
+	QUIT
+%SQLInsert(%d,%check,%inssel,%vco,%tstart=1,%mv=0)
+	// SQL INSERT method for table KafkaBank.Trans
+	new bva,%ele,%itm,%key,%f,%l,%n,%nc,%oper,%pos,%s,sqlcode,sn,subs,icol set %oper="INSERT",sqlcode=0,%l=$c(0,0,0)
+	if $a(%check,7) { new %diu merge %diu=%d }
+	if $d(%d(1)),'$zu(115,11) { if %d(1)'="" { set SQLCODE=-111,%msg=$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler6",,"ID","KafkaBank"_"."_"Trans") RETURN ""  } kill %d(1) } 
+	if '$a(%check),'..%SQLValidateFields(.sqlcode) { set SQLCODE=sqlcode RETURN "" }
+	do:'$a(%check,8) ..%SQLNormalizeFields()
+	if %tstart { TSTART:($zu(115,1)=1)||('$TLEVEL&&($zu(115,1)=2))  } set $zt="ERRORInsert"
+	if '$a(%check) {
+		do {
+			if $g(%vco)'="" { d @%vco quit:sqlcode<0  }
+		} while 0
+		if sqlcode<0 { set SQLCODE=sqlcode do ..%SQLEExit() RETURN "" }		// A constraint failed
+	}
+	if '$d(%d(1)) { set %d(1)=$i(^KafkaBank.TransD) } elseif %d(1)>$g(^KafkaBank.TransD) { if $i(^KafkaBank.TransD,$zabs(%d(1)-$g(^KafkaBank.TransD))) {}} elseif $d(^KafkaBank.TransD(%d(1))) { set SQLCODE=-119,%msg=$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler33",,"ID",%d(1),"KafkaBank"_"."_"Trans"_"."_"ID") do ..%SQLEExit() RETURN "" }
+	set:'($d(%d(24))#2) %d(24)=""
+	if '$a(%check,2) {
+		new %ls lock +^KafkaBank.TransD(%d(1))#"E":$zu(115,4) set %ls=$s('$t:0,1:$case($SYSTEM.Lock.ReturnCode(),0:1,4:2,2:2,1:3,:""))
+		set:%ls=2 $e(%check,2)=$c(1) set:%ls=2&&($tlevel) %0CacheLock("KafkaBank.Trans","E")=1 set:$case(%ls,1:1,2:1,:0) $e(%l)=$c(1)
+		if '%ls||(%ls=3) { set SQLCODE=-110,%msg=$$FormatMessage^%occMessages(,"%SQL.Filer",$s('%ls:"SQLFiler40",1:"SQLFiler55"),,%oper,"KafkaBank"_"."_"Trans",$g(%d(1))) do ..%SQLEExit() RETURN ""  }
+	}
+	set ^KafkaBank.TransD(%d(1))=$lb(%d(24),%d(20),%d(4),%d(15),%d(3),%d(2),%d(8),%d(12),%d(9),%d(19),%d(5),%d(18),%d(23),%d(13),%d(14),%d(6),%d(11),%d(7),%d(21),%d(22),%d(16),%d(17),%d(10))
+	set ^OBJ.DSTIME("KafkaBank.Trans",$Get(^OBJ.DSTIME,0),%d(1))=1
+	lock:$a(%l) -^KafkaBank.TransD(%d(1))#"E"
+	TCOMMIT:%tstart&&($zu(115,1)=1)
+	set SQLCODE=0
+	QUIT %d(1) 			// %SQLInsert
+ERRORInsert	set $zt="",SQLCODE=-415,%msg=$s($g(%msg)'="":%msg_" -- ",1:"")_$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler51",,%oper,"KafkaBank"_"."_"Trans",$ze)
+	if $ze["<FRAMESTACK>" { set %msg=$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler52",,$ze,%oper,"KafkaBank"_"."_"Trans") do ##Class(%SYS.System).WriteToConsoleLog(%msg) if ($zu(67,10,$j)=1)||($zu(67,10,$j)=3) { write !,%msg h 3 } HALT  }
+	do ..%SQLEExit()
+	RETURN ""
+%SQLInvalid(pIcol,pVal) public {
+	set:$l($g(pVal))>40 pVal=$e(pVal,1,40)_"..." do:'$d(%n) ..%SQLnBuild() set %msg=$s($g(%msg)'="":%msg_$c(13,10),1:"")_$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler37",,"KafkaBank"_"."_"Trans"_"."_$lg(%n,pIcol),$s($g(pVal)'="":$s(pVal="":"<NULL>",pVal=$c(0):"<EMPTY STRING>",1:"'"_pVal_"'"),1:"")),sqlcode=$s(%oper="INSERT":-104,1:-105)
+	QUIT sqlcode }
+%SQLMissing(fname)
+	set sqlcode=-108,%msg=$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler47",,fname,"KafkaBank"_"."_"Trans") quit
+%SQLNormalizeFields()
+	set:$g(%d(10))'="" %d(10)=$s(%d(10)="":"",1:%d(10)\1)
+	new %f for %f=2,13,14,16,17 { set:$g(%d(%f))'="" %d(%f)=$select(%d(%f)="":"",$zu(115,13)&&(%d(%f)=$c(0)):"",1:$double(%d(%f))) }
+	set:$g(%d(6))'="" %d(6)=$select(%d(6)=$c(0)&&$zu(115,13):"",1:%d(6)\1)
+	QUIT
+%SQLPurgeIndices(pIndices="",pLockExtent=0,pIgnoreIndexList="")
+	RETURN ..%PurgeIndices(pIndices,pLockExtent,pIgnoreIndexList)
+%SQLQuickLoad(%rowid,%nolock=0,pkey=0,qq=0)
+	// Get fields from row where SQLRowID=%rowid
+	new d,i,il,subs set:%nolock=2 %nolock=1
+	if %nolock=0 { if '..%SQLAcquireLock(%rowid) { set %qrc=114,%msg=$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler45",,"KafkaBank"_"."_"Trans",%rowid),%ROWCOUNT=0 QUIT  } set:$zu(115,2) il=$zu(115,2,0) }
+	new s,ul set ul=0,d(1)=%rowid if $zu(115,2)=1 { lock +^KafkaBank.TransD(d(1))#"S":$zu(115,4) if $t { set ul=1 } else { set %qrc=114,%msg=$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler46",,"KafkaBank"_"."_"Trans",%rowid),%ROWCOUNT=0 quit  } }
+	if '$d(^KafkaBank.TransD(d(1)),s) { set SQLCODE=100,%qrc=100 if %nolock=0 { do:$g(il) $zu(115,2,il) }} else { set SQLCODE=0
+	if qq { set d(24)=$lg(s) if d(24)'="" { new sn set sn=$p(d(24),$e(d(24)),$l(d(24),$e(d(24)))-1) if "KafkaBank.Trans"'=sn { if %nolock=0 { do ..%SQLReleaseLock(%rowid,0,1) do:$g(il) $zu(115,2,il) } kill d set:sn'["." sn="User."_sn do $classmethod(sn,"%SQLQuickLoad",%rowid,%nolock,0,1) QUIT  }}}
+	set d(2)=$lg(s,6) set d(3)=$lg(s,5) set d(4)=$lg(s,3) set d(5)=$lg(s,11) set d(6)=$lg(s,16) set d(7)=$lg(s,18) set d(8)=$lg(s,7) set d(9)=$lg(s,9) set d(10)=$lg(s,23) set d(11)=$lg(s,17) set d(12)=$lg(s,8) set d(13)=$lg(s,14) set d(14)=$lg(s,15) set d(15)=$lg(s,4) set d(16)=$lg(s,21) set d(17)=$lg(s,22) set d(18)=$lg(s,12) set d(19)=$lg(s,10) set d(20)=$lg(s,2) set d(21)=$lg(s,19) set d(22)=$lg(s,20) set d(23)=$lg(s,13) set d(24)=$lg(s)  }
+	do ..%SQLQuickLogicalToOdbc(.d)
+	if SQLCODE set %ROWCOUNT=0 set:SQLCODE<0 SQLCODE=-SQLCODE lock:ul -^KafkaBank.TransD(d(1))#"SI" set %qrc=SQLCODE QUIT
+	set:qq d=$zobjexport("KafkaBank.Trans",18),d=$zobjexport(24,18) set i=-1 for  { set i=$o(d(i)) quit:i=""  set d=$zobjexport(d(i),18) } set %qrc=0,%ROWCOUNT=1 lock:ul -^KafkaBank.TransD(d(1))#"SI" if %nolock=0 { do ..%SQLReleaseLock(%rowid,0,0) do:$g(il) $zu(115,2,il) } QUIT
+	Return
+%SQLReleaseLock(%rowid,s=0,i=0,e="")
+	new %d
+	set:e="" e=1 set %d(1)=%rowid set s=$e("E",e)_$e("S",s)_$e("D",i)
+	lock -^KafkaBank.TransD(%d(1))#s
+	QUIT
+%SQLReleaseTableLock(s=0,i=0)
+	set s=$e("S",s)_$e("D",i) lock -^KafkaBank.TransD#s QUIT 1
+	Return
+%SQLUnlock()
+	lock:$a(%l) -^KafkaBank.TransD(%d(1))#"E"
+	QUIT
+%SQLUnlockError(cname)
+	set sqlcode=-110 if %oper="DELETE" { set %msg=$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler48",,"KafkaBank"_"."_"Trans",cname) } else { set %msg=$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler49",,"KafkaBank"_"."_"Trans",cname) } quit
+	Return
+%SQLUpdate(%rowid,%check,%d,%vco,%tstart=1,%mv=0,%polymorphic=0,%soid)
+	// SQL UPDATE method for table KafkaBank.Trans
+	new %e,bva,%ele,%itm,%key,%f,%l,%n,%nc,%oper,%pos,%s,icol,omcall,s,sn,sqlcode,subs,t set %oper="UPDATE",sqlcode=0,%ROWID=%rowid,$e(%e,1)=$c(0),%l=$c(0,0,0)
+	if '$d(%0CacheSQLRA) { new %0CacheSQLRA set omcall=1 }
+	if '$a(%check),'$a(%check,7),'..%SQLValidateFields(.sqlcode) { set SQLCODE=sqlcode QUIT  }
+	do:'$a(%check,8) ..%SQLNormalizeFields()
+	if $d(%d(1)),%d(1)'=%rowid { set SQLCODE=-107,%msg=$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler16",,"ID","KafkaBank"_"."_"Trans") QUIT  }
+	for icol=2:1:24 { set $e(%e,icol)=$c($d(%d(icol))) }
+	set %d(1)=%rowid,%e(1)=%rowid
+	if '$a(%check,2) {
+		new %ls lock +^KafkaBank.TransD(%d(1))#"E":$zu(115,4) set %ls=$s('$t:0,1:$case($SYSTEM.Lock.ReturnCode(),0:1,4:2,2:2,1:3,:""))
+		set:%ls=2 $e(%check,2)=$c(1) set:%ls=2&&($tlevel) %0CacheLock("KafkaBank.Trans","E")=1 set:$case(%ls,1:1,2:1,:0) $e(%l)=$c(1)
+		if '%ls||(%ls=3) { set SQLCODE=-110,%msg=$$FormatMessage^%occMessages(,"%SQL.Filer",$s('%ls:"SQLFiler40",1:"SQLFiler55"),,%oper,"KafkaBank"_"."_"Trans",$g(%d(1))) RETURN  }
+	}
+	if %tstart { TSTART:($zu(115,1)=1)||('$TLEVEL&&($zu(115,1)=2))  }
+	set $zt="ERRORUpdate"
+	if $g(%vco)="" { do ..%SQLGetOld(%rowid,.%d,.%e,.sqlcode) i sqlcode { s SQLCODE=-109,%msg=$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler59",,"KafkaBank"_"."_"Trans",%rowid) do ..%SQLEExit() QUIT  } set:'$d(%d(24)) %d(24)=%e(24) set:%d(24)=%e(24) $e(%e,24)=$c(0) } else { do ..%SQLGetOldAll() if sqlcode { set SQLCODE=-109,%msg=$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler59",,"KafkaBank"_"."_"Trans",%rowid) do ..%SQLEExit() QUIT  } for icol=2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24 { set:'$d(%d(icol)) %d(icol)=%e(icol) set:%d(icol)=%e(icol) $e(%e,icol)=$c(0) }}
+	if %e(24)'="" set sn=$p(%e(24),$e(%e(24)),$l(%e(24),$e(%e(24)))-1) if "KafkaBank.Trans"'=sn new %f do ..%SQLCopyIcolIntoName() do $classmethod(sn,"%SQLUpdate",%rowid,%check,.%d,$g(%vco),%tstart,%mv,1) QUIT
+	if '$a(%check) {
+		do {
+			if $g(%vco)'="" { d @%vco quit:sqlcode<0  }
+		} while 0
+		if sqlcode { set SQLCODE=sqlcode do ..%SQLEExit() QUIT  }
+	}
+	if ($zboolean(%e,$c(0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1),1)[$c(1)) {
+		set ^KafkaBank.TransD(%d(1))=$listupdate($g(^KafkaBank.TransD(%d(1))),1,$a(%e,24):%d(24),$a(%e,20):%d(20),$a(%e,4):%d(4),$a(%e,15):%d(15),$a(%e,3):%d(3),$a(%e,2):%d(2),$a(%e,8):%d(8),$a(%e,12):%d(12),$a(%e,9):%d(9),$a(%e,19):%d(19),$a(%e,5):%d(5),$a(%e,18):%d(18),$a(%e,23):%d(23),$a(%e,13):%d(13),$a(%e,14):%d(14),$a(%e,6):%d(6),$a(%e,11):%d(11),$a(%e,7):%d(7),$a(%e,21):%d(21),$a(%e,22):%d(22),$a(%e,16):%d(16),$a(%e,17):%d(17),$a(%e,10):%d(10))
+	}
+	set ^OBJ.DSTIME("KafkaBank.Trans",$Get(^OBJ.DSTIME,0),%d(1))=0
+	do ..%SQLUnlock() TCOMMIT:%tstart&&($zu(115,1)=1)
+	set SQLCODE=0 kill:$g(omcall) %0CacheSQLRA
+	QUIT
+ERRORUpdate	set $zt="",SQLCODE=-415,%msg=$s($g(%msg)'="":%msg_" -- ",1:"")_$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler51",,%oper,"KafkaBank"_"."_"Trans",$ze) if $ze["<FRAMESTACK>" { set %msg=$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler52",,$ze,%oper,"KafkaBank"_"."_"Trans") do ##Class(%SYS.System).WriteToConsoleLog(%msg) if ($zu(67,10,$j)=1)||($zu(67,10,$j)=3) { write !,%msg h 3 } HALT  } do ..%SQLEExit() QUIT  
+	Return
+%SQLValidateCompFields(sqlcode)
+	QUIT 'sqlcode
+%SQLValidateFields(sqlcode)
+	if $g(%d(10))'="",'($$ValidateField10(%d(10))) { set sqlcode=..%SQLInvalid(10+1,%d(10)) } 
+	new %f for %f=2,13,14,16,17 { if $g(%d(%f))'="",'($select($zu(115,13)&&(%d(%f)=$c(0)):1,$isvaliddouble(%d(%f),,,):1,1:$$Error^%apiOBJ(5794,"%Double",%d(%f)))) set sqlcode=..%SQLInvalid(%f+1,$g(%d(%f))) quit  } 
+	if $g(%d(6))'="",'($select(%d(6)=$c(0)&&$zu(115,13):1,$isvalidnum(%d(6),0):1,1:$$Error^%apiOBJ(7207,%d(6)))) { set sqlcode=..%SQLInvalid(6+1,%d(6)) } 
+	for %f=3,4,5,7,8,9,11,12,15,18,19,20,21,22,23 { if $g(%d(%f))'="",'(($l(%d(%f))'>50)) set sqlcode=..%SQLInvalid(%f+1,$g(%d(%f))) quit  } 
+	QUIT 'sqlcode
+ValidateField10(%val="") {	Quit $case(%val,"":1,1:1,0:1,:$$Error^%apiOBJ(7206,%val))
+}
+	Return
+%SQLnBuild() public {
+	set %n=$lb(,"ID","amt","category","ccnum","city","citypop","dob","first","gender","isfraud","job","last","lat","long","merchant","merchlat","merchlong","state","street","transdatetime","transnum","unixtime","zip","x__classname")
+	QUIT }
+%Save(related=1) public {
+	Set $ZTrap="%SaveERR"
+	New %objTX Set sc=1,traninit=0 If '$data(%objTX2) New %objTX2 Set %objTX2=1
+	If +$g(%objtxSTATUS)=0 { Set traninit=1 k %objtxSTATUS,%objtxLIST,%objtxOIDASSIGNED,%objtxOIDUNASSIGNED,%objtxMODIFIED,%objtxVERSION k:'$TLevel %objtxTID,%objtxID i '$zu(115,9) { s %objtxSTATUS=1 } else { TStart  s %objtxSTATUS=2 } }
+	Set (index,%objTX(0,+$this))=$i(%objTX(1)),%objTX(1,index,1)=i%"%%OID",%objTX(1,index)=$this,%objTX(1,index,4)=$select(%objTX(1,index,1)="":1,..%ExistsId($listget(%objTX(1,index,1))):0,1:1)
+	If ..%ObjectModified() Set sc=..%SerializeObject(i%"%%OID") If ('sc) ZTrap "SG"
+	Set cmd="" For  Set cmd=$order(%objTX(9,cmd)) Quit:cmd=""  Xecute cmd
+%SaveCOMMIT	If traninit { i $g(%objtxSTATUS)=1 { k %objtxSTATUS } else { If $Tlevel { TCommit  } k %objtxSTATUS,%objtxLIST,%objtxOIDASSIGNED,%objtxOIDUNASSIGNED,%objtxMODIFIED,%objtxVERSION k:'$TLevel %objtxTID,%objtxID } }
+	Do $system.CLS.SetModified(0) Quit sc
+%SaveERR	Set $ZTrap="" If $extract($zerror,1,5)'="<ZSG>" Set sc=$$Error^%apiOBJ(5002,$ZE)
+	If $get(traninit) { i $g(%objtxSTATUS)=2 { s sc=$select(+sc:$$%TRollBack^%occTransaction(),1:$$AppendStatus^%occSystem(sc,$$%TRollBack^%occTransaction())) k %objtxTID,%objtxID } else { k %objtxSTATUS } }
+	Quit sc }
+%SaveData(id) public {
+	try {
+		set id=$listget(i%"%%OID") if id'="" { set insert=0,idassigned=1 } else { set insert=1,idassigned=0 }
+		set lock=0,lockok=0,tSharedLock=0
+		if 'idassigned { set id=$i(^KafkaBank.TransD) do ..%IdSet(id) set:$g(%objtxSTATUS)=2 %objtxOIDASSIGNED(+$this)="" }
+		try {
+			set tInnerException = ""
+			;
+			if 'insert {
+				if (i%%Concurrency<4)&&(i%%Concurrency) { lock +(^KafkaBank.TransD(id)#"E"):$zu(115,4) set lockok=$s('$t:0,1:$case($SYSTEM.Lock.ReturnCode(),0:1,2:2,4:2,:0)) set:lockok=2&&($tlevel) %0CacheLock($classname(),"E")=1 if lockok { set lock=1 } else { Throw ##class(%Exception.StatusException).ThrowIfInterrupt($$Error^%apiOBJ(5803,$classname())) } }
+				if ('$Data(^KafkaBank.TransD(id))) {
+					set insert=1
+					if lock { lock -(^KafkaBank.TransD(id)#"E") set (lock,lockok) = 0 }
+				}
+			}
+			if insert {
+				if ('lockok&&..%Concurrency&&$tlevel)||(i%%Concurrency=4) {  lock +(^KafkaBank.TransD(id)#"E"):$zu(115,4) set lockok=$s('$t:0,1:$case($SYSTEM.Lock.ReturnCode(),0:1,2:2,4:2,:0)) set:(lockok=2&&(i%%Concurrency'=4)) %0CacheLock($classname(),"E")=1 set:lockok lock=1 if 'lockok { Throw ##class(%Exception.StatusException).ThrowIfInterrupt($$Error^%apiOBJ(5803,$classname())) } }
+				if i%%Concurrency=3 { lock +(^KafkaBank.TransD(id)#"ES") set tSharedLock=1 }
+				set ^KafkaBank.TransD(id)=$lb("",i%transdatetime,i%ccnum,i%merchant,i%category,i%amt,i%first,i%last,i%gender,i%street,i%city,i%state,i%zip,i%lat,i%long,i%citypop,i%job,i%dob,i%transnum,i%unixtime,i%merchlat,i%merchlong,i%isfraud)
+			}
+			else {
+				set ^KafkaBank.TransD(id)=$lb("",i%transdatetime,i%ccnum,i%merchant,i%category,i%amt,i%first,i%last,i%gender,i%street,i%city,i%state,i%zip,i%lat,i%long,i%citypop,i%job,i%dob,i%transnum,i%unixtime,i%merchlat,i%merchlong,i%isfraud)
+			}
+			set tStatus = 1
+		}
+		catch tInnerException {
+			if ('idassigned) { Set $zobjoid("",$listget(i%"%%OID"))="",i%"%%OID"="" kill:$g(%objtxSTATUS)=2 %objtxOIDASSIGNED(+$this) }
+			if (tSharedLock) {  lock -(^KafkaBank.TransD(id)#"ES") } elseif (lockok=1)&&(insert)&&(i%%Concurrency=4) {  lock -(^KafkaBank.TransD(id)) }
+		}
+		if lock lock -(^KafkaBank.TransD(id)#"E")
+		if $Isobject(tInnerException) { throw tInnerException }
+	}
+	catch tException {
+		set tStatus = tException.AsStatus()
+	}
+	quit tStatus }
+%SaveDirect(id="",idList="",data,concurrency=-1) public {
+	try {
+		if concurrency=-1 { set concurrency=$zu(115,10) }
+		if id'="" { set insert=0,idassigned=1 } else { set insert=1,idassigned=0 }
+		set lock=0,tSharedLock=0
+		if 'idassigned { set id=$i(^KafkaBank.TransD) }
+		try {
+			set tInnerException = ""
+			;
+			if 'insert {
+				if concurrency { lock +(^KafkaBank.TransD(id)#"E"):$zu(115,4) set lock=$s('$t:0,1:$case($SYSTEM.Lock.ReturnCode(),0:1,2:2,4:2,:0)) set:lock=2&&($tlevel) %0CacheLock($classname(),"E")=1 if 'lock { Throw ##class(%Exception.StatusException).ThrowIfInterrupt($$Error^%apiOBJ(5803,$classname())) } }
+				if ('$Data(^KafkaBank.TransD(id))) {
+					set insert=1
+					if lock { lock -(^KafkaBank.TransD(id)#"E") set (lock,lockok) = 0 }
+				}
+			}
+			if insert {
+				if concurrency { lock +(^KafkaBank.TransD(id)#"E"):$zu(115,4) set lock=$s('$t:0,1:$case($SYSTEM.Lock.ReturnCode(),0:1,2:2,4:2,:0)) set:lock=2&&($tlevel) %0CacheLock($classname(),"E")=1 if 'lock { Throw ##class(%Exception.StatusException).ThrowIfInterrupt($$Error^%apiOBJ(5803,$classname())) } }
+				set ^KafkaBank.TransD(id)=data
+			}
+			else {
+				set ^KafkaBank.TransD(id)=data
+			}
+			set ^OBJ.DSTIME($classname(),$Get(^OBJ.DSTIME,0),id)=insert
+			set tStatus = 1
+		}
+		catch tInnerException {
+		}
+		if lock lock -(^KafkaBank.TransD(id)#"E")
+		if $Isobject(tInnerException) { throw tInnerException }
+	}
+	catch tException {
+		set tStatus = tException.AsStatus()
+	}
+	quit tStatus }
+%SaveIndices(pStartId="",pEndId="",lockExtent=0) public {
+	Quit 1 }
+%SerializeObject(serial,partial=0) public {
+	try {
+		If $get(%objTX2(+$this)) { Set partial = 1 } ElseIf ('partial) { Set %objTX2(+$this) = 1 }
+		Set sc=..%ValidateObject(,0) Throw:('sc) ##class(%Exception.StatusException).ThrowIfInterrupt(sc)
+		Set sc=..%NormalizeObject() Throw:('sc) ##class(%Exception.StatusException).ThrowIfInterrupt(sc)
+		s:$g(%objtxSTATUS)=2 %objtxLIST(+$this)=$this
+		Set id=$listget(serial),sc=..%SaveData(.id) If ('sc) { Throw ##class(%Exception.StatusException).ThrowIfInterrupt(sc) }
+		Set serial=(..%Oid())
+		if 'partial {
+			set ^OBJ.DSTIME($classname(),$Get(^OBJ.DSTIME,0),$listget(serial))=%objTX(1,%objTX(0,+$this),4)
+			Set %objTX2(+$this) = 0
+		}
+		set sc=1
+	}
+	catch tException {
+		If 'partial { Set %objTX2(+$this) = 0 }
+		set sc = tException.AsStatus()
+	}
+	Quit sc }
+%AddToSaveSet(depth=3,refresh=0) public {
+	Set sc=1,intOref=+$this
+	If $data(%objTX(0,intOref),index) {
+		If 'refresh RETURN 1
+		Set intPoref="" For  Set intPoref=$order(%objTX(1,index,2,intPoref)) Quit:intPoref=""  Kill %objTX(1,%objTX(0,intPoref),3,index),%objTX(1,index,2,%objTX(0,intPoref))
+	}
+	Set:'$d(index) (index,%objTX(0,intOref))=$i(%objTX(1)),%objTX(1,index)=$this Set %objTX(1,index,1)=i%"%%OID",%objTX(1,index,6)=1 If (i%"%%OID" '= "") && (depth<2) { Quit 1 } Else { Set %objTX(7,index)=$lb(intOref,1) }
+	Set %objTX(1,index,4)=$select(%objTX(1,index,1)="":1,..%ExistsId($listget(%objTX(1,index,1))):0,1:1)
+exit	Quit sc }
+%SortBegin(idxlist="",excludeunique=0)
+	Quit 1
+%SortEnd(idxlist="",commit=1,excludeunique=0) public {
+	Quit 1 }
+%UnlockExtent(shared=0,immediate=0) public {
+	If 'shared {
+		If 'immediate {
+			Lock -^KafkaBank.TransD
+			 Quit 1
+		}
+		Lock -^KafkaBank.TransD#"I"
+		Quit 1
+	}
+	If 'immediate {
+		Lock -^KafkaBank.TransD#"S"
+		Quit 1
+	}
+	Lock -^KafkaBank.TransD#"SI"
+	Quit 1 }
+%UnlockId(id,shared=0,immediate=0) public {
+	If 'shared {
+		If 'immediate {
+			Lock -(^KafkaBank.TransD(id)#"E")
+			Quit 1
+		}
+		Lock -(^KafkaBank.TransD(id)#"IE")
+		Quit 1
+	}
+	If 'immediate {
+		Lock -(^KafkaBank.TransD(id)#"SE")
+		Quit 1
+	}
+	Lock -(^KafkaBank.TransD(id)#"SIE")
+	Quit 1 }
+%ValidateIndices(idxList="",autoCorrect=0,lockOption=1,multiProcess=1,mapList,verbose=1,errors)
+	w !,"There are no indices to validate for class 'KafkaBank.Trans'"
+	QUIT 1
+%ValidateObject(unused=0,checkserial=1) public {
+	set sc=1
+	If '$system.CLS.GetModified() Quit sc
+	If m%amt Set iv=..amt If iv'="" Set rc=(..amtIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"amt",iv)
+	If m%category Set iv=..category If iv'="" Set rc=(..categoryIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"category",iv)
+	If m%ccnum Set iv=..ccnum If iv'="" Set rc=(..ccnumIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"ccnum",iv)
+	If m%city Set iv=..city If iv'="" Set rc=(..cityIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"city",iv)
+	If m%citypop Set iv=..citypop If iv'="" Set rc=(..citypopIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"citypop",iv)
+	If m%dob Set iv=..dob If iv'="" Set rc=(..dobIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"dob",iv)
+	If m%first Set iv=..first If iv'="" Set rc=(..firstIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"first",iv)
+	If m%gender Set iv=..gender If iv'="" Set rc=(..genderIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"gender",iv)
+	If m%isfraud Set iv=..isfraud If iv'="" Set rc=(..isfraudIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"isfraud",iv)
+	If m%job Set iv=..job If iv'="" Set rc=(..jobIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"job",iv)
+	If m%last Set iv=..last If iv'="" Set rc=(..lastIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"last",iv)
+	If m%lat Set iv=..lat If iv'="" Set rc=(..latIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"lat",iv)
+	If m%long Set iv=..long If iv'="" Set rc=(..longIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"long",iv)
+	If m%merchant Set iv=..merchant If iv'="" Set rc=(..merchantIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"merchant",iv)
+	If m%merchlat Set iv=..merchlat If iv'="" Set rc=(..merchlatIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"merchlat",iv)
+	If m%merchlong Set iv=..merchlong If iv'="" Set rc=(..merchlongIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"merchlong",iv)
+	If m%state Set iv=..state If iv'="" Set rc=(..stateIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"state",iv)
+	If m%street Set iv=..street If iv'="" Set rc=(..streetIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"street",iv)
+	If m%transdatetime Set iv=..transdatetime If iv'="" Set rc=(..transdatetimeIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"transdatetime",iv)
+	If m%transnum Set iv=..transnum If iv'="" Set rc=(..transnumIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"transnum",iv)
+	If m%unixtime Set iv=..unixtime If iv'="" Set rc=(..unixtimeIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"unixtime",iv)
+	If m%zip Set iv=..zip If iv'="" Set rc=(..zipIsValid(iv)) If ('rc) Set sc=$$EmbedErr^%occSystem(sc,rc,5802,"zip",iv)
+	Quit sc }
+zamtDisplayToLogical(%val) public {
+	Quit $select(%val="":"",$zu(115,13)&&(%val=$c(0)):"",1:$s($in(%val,"","")'="":$double($in(%val,"",%val)),1:%val)) }
+zamtGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),6),1:"") }
+zamtIsValid(%val) public {
+	Quit $select($zu(115,13)&&(%val=$c(0)):1,$isvaliddouble(%val,,,):1,1:$$Error^%apiOBJ(5794,"%Double",%val)) }
+zamtJSONToLogical(%val) public {
+	Quit $select($isvaliddouble(%val):$double(%val),1:"") }
+zamtLogicalToDisplay(%val) public {
+	Quit $s(%val="":"",1:$fn(%val,"")) }
+zamtLogicalToJSON(%val) public {
+	Quit $case($zcvt(%val,"U"),"NAN":"""NaN""","-INF":"""-INF""","+INF":"""+INF""","INF":"""INF""",:$select($extract(%val)=".":"0"_%val,$extract(%val,1,2)="-.":"-0."_$extract(%val,3,*),1:%val)) }
+zamtNormalize(%val) public {
+	Quit $select(%val="":"",$zu(115,13)&&(%val=$c(0)):"",1:$double(%val)) }
+zamtOdbcToLogical(%val) public {
+	Quit $select(%val=""||($zu(115,13)&&(%val=$c(0))):"",'$isvaliddouble(%val,,,):%val,1:$double(%val)) }
+zcategoryGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),5),1:"") }
+zccnumGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),3),1:"") }
+zcityGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),11),1:"") }
+zcitypopDisplayToLogical(%val) public {
+	Q $select(%val="":"",%val=$c(0)&&$zu(115,13):"",1:$s($in(%val,"","")'="":+$in(%val,"",%val),1:%val)) }
+zcitypopGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),16),1:"") }
+zcitypopIsValid(%val) public {
+	Quit $select(%val=$c(0)&&$zu(115,13):1,$isvalidnum(%val,0):1,1:$$Error^%apiOBJ(7207,%val)) }
+zcitypopNormalize(%val) public {
+	Quit $select(%val=$c(0)&&$zu(115,13):"",1:%val\1) }
+zcitypopXSDToLogical(%val) public {
+	Q $s($tr(%val,"Ee(),.")'=%val:"",1:$number(%val,"I")) }
+zdobGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),18),1:"") }
+zfirstGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),7),1:"") }
+zgenderGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),9),1:"") }
+zisfraudDisplayToLogical(%val) public {
+	Quit $s(%val="":"",1:''%val) }
+zisfraudGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),23),1:"") }
+zisfraudIsValid(%val="") public {
+	Quit $case(%val,"":1,1:1,0:1,:$$Error^%apiOBJ(7206,%val)) }
+zisfraudNormalize(%val) public {
+	Quit $s(%val="":"",1:%val\1) }
+zjobGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),17),1:"") }
+zlastGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),8),1:"") }
+zlatGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),14),1:"") }
+zlongGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),15),1:"") }
+zmerchantGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),4),1:"") }
+zmerchlatDisplayToLogical(%val) public {
+	Quit $select(%val="":"",$zu(115,13)&&(%val=$c(0)):"",1:$s($in(%val,"","")'="":$double($in(%val,"",%val)),1:%val)) }
+zmerchlatGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),21),1:"") }
+zmerchlatIsValid(%val) public {
+	Quit $select($zu(115,13)&&(%val=$c(0)):1,$isvaliddouble(%val,,,):1,1:$$Error^%apiOBJ(5794,"%Double",%val)) }
+zmerchlatJSONToLogical(%val) public {
+	Quit $select($isvaliddouble(%val):$double(%val),1:"") }
+zmerchlatLogicalToDisplay(%val) public {
+	Quit $s(%val="":"",1:$fn(%val,"")) }
+zmerchlatLogicalToJSON(%val) public {
+	Quit $case($zcvt(%val,"U"),"NAN":"""NaN""","-INF":"""-INF""","+INF":"""+INF""","INF":"""INF""",:$select($extract(%val)=".":"0"_%val,$extract(%val,1,2)="-.":"-0."_$extract(%val,3,*),1:%val)) }
+zmerchlatNormalize(%val) public {
+	Quit $select(%val="":"",$zu(115,13)&&(%val=$c(0)):"",1:$double(%val)) }
+zmerchlatOdbcToLogical(%val) public {
+	Quit $select(%val=""||($zu(115,13)&&(%val=$c(0))):"",'$isvaliddouble(%val,,,):%val,1:$double(%val)) }
+zmerchlongDisplayToLogical(%val) public {
+	Quit $select(%val="":"",$zu(115,13)&&(%val=$c(0)):"",1:$s($in(%val,"","")'="":$double($in(%val,"",%val)),1:%val)) }
+zmerchlongGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),22),1:"") }
+zmerchlongIsValid(%val) public {
+	Quit $select($zu(115,13)&&(%val=$c(0)):1,$isvaliddouble(%val,,,):1,1:$$Error^%apiOBJ(5794,"%Double",%val)) }
+zmerchlongJSONToLogical(%val) public {
+	Quit $select($isvaliddouble(%val):$double(%val),1:"") }
+zmerchlongLogicalToDisplay(%val) public {
+	Quit $s(%val="":"",1:$fn(%val,"")) }
+zmerchlongLogicalToJSON(%val) public {
+	Quit $case($zcvt(%val,"U"),"NAN":"""NaN""","-INF":"""-INF""","+INF":"""+INF""","INF":"""INF""",:$select($extract(%val)=".":"0"_%val,$extract(%val,1,2)="-.":"-0."_$extract(%val,3,*),1:%val)) }
+zmerchlongNormalize(%val) public {
+	Quit $select(%val="":"",$zu(115,13)&&(%val=$c(0)):"",1:$double(%val)) }
+zmerchlongOdbcToLogical(%val) public {
+	Quit $select(%val=""||($zu(115,13)&&(%val=$c(0))):"",'$isvaliddouble(%val,,,):%val,1:$double(%val)) }
+zstateGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),12),1:"") }
+zstreetGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),10),1:"") }
+ztransdatetimeGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),2),1:"") }
+ztransnumGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),19),1:"") }
+zunixtimeGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),20),1:"") }
+zzipGetStored(id) public {
+	Quit $Select(id'="":$listget($g(^KafkaBank.TransD(id)),13),1:"") }
+zExtentClose(%qHandle) [ SQLCODE ] public {
+	New SQLCODE Set SQLCODE=0
+	Do:$isobject($get(%qHandle)) %qHandle.%Destruct() Kill %qHandle
+	If SQLCODE { Set:$isobject($g(%sqlcontext)) %sqlcontext.%SQLCODE=SQLCODE,%sqlcontext.%Message=$g(%msg) Set sc=$$Error^%apiOBJ(5540,SQLCODE,$get(%msg)) } Else { Set sc=1 }
+	Quit sc }
+zExtentExecute(%qHandle) [ SQLCODE ] public { New %ROWCOUNT,%ROWID,%msg,SQLCODE 
+	Set sc=1
+	 ;---&sql(DECLARE QExtent CURSOR FOR
+ 	 ;---		 SELECT ID FROM KafkaBank.Trans)
+ 	 ;--- ** SQL PUBLIC Variables: %ROWCOUNT, %ROWID, %msg, SQLCODE
+	 
+	 ;---&sql(OPEN QExtent)
+	if $g(%qHandle)'="" { s SQLCODE=-101 } else { try { s %qHandle="%sqlcq."_$tr($namespace,"%_-$@:/\[]^ .","pudssssssssss")_".xEu82L7mFl2OlhCfB5G1H0Z3xLQN",%qHandle=$classmethod(%qHandle,"%New") } catch { if ($ze'["<CLASS DOES NOT EXIST>"||($ze'[%qHandle)),$ze'["<ZSQLU>" { throw } } if '$isobject(%qHandle) { s %qHandle=$$%0dsqlD() } }
+	If SQLCODE { Set:$isobject($g(%sqlcontext)) %sqlcontext.%SQLCODE=SQLCODE,%sqlcontext.%Message=$g(%msg) Set sc=$$Error^%apiOBJ(5821,"SQLCODE = "_SQLCODE_" %msg = "_$g(%msg)) } Else { Set sc=1 }
+	Quit sc }
+zExtentFetch(%qHandle,Row,AtEnd=0) [ SQLCODE ] public { New %ROWCOUNT,%ROWID,%msg,SQLCODE 
+	Set Row="",AtEnd=0
+	 ;---&sql(FETCH QExtent INTO :c1)
+ 	 ;--- ** SQL PUBLIC Variables: %ROWCOUNT, %ROWID, %msg, SQLCODE
+	if $isobject($g(%qHandle))'=1 { s SQLCODE=-102 } else { do %qHandle.FET() i SQLCODE=0 { s c1=%qHandle.sqlcol1 } }
+	If 'SQLCODE { Set Row=$lb(c1) Set sc=1 }
+	ElseIf SQLCODE=100 { Set AtEnd=1,sc=1 Set:$isobject($g(%sqlcontext)) %sqlcontext.%SQLCODE=SQLCODE,%sqlcontext.%ROWCOUNT=$g(%ROWCOUNT) }
+	Else { Set:$isobject($g(%sqlcontext)) %sqlcontext.%SQLCODE=SQLCODE,%sqlcontext.Message=$g(%msg) Set AtEnd=1,sc=$$Error^%apiOBJ(5540,SQLCODE,$get(%msg)) }
+	QUIT sc }
+zExtentFetchRows(%qHandle,FetchCount=0,RowSet,ReturnCount,AtEnd) [ SQLCODE ] public { New %ROWCOUNT,%ROWID,%msg,SQLCODE 
+	Set RowSet="",ReturnCount=0,AtEnd=0
+	For {
+		 ;---&sql(FETCH QExtent INTO :c1)
+ 		 ;--- ** SQL PUBLIC Variables: %ROWCOUNT, %ROWID, %msg, SQLCODE
+		if $isobject($g(%qHandle))'=1 { s SQLCODE=-102 } else { do %qHandle.FET() i SQLCODE=0 { s c1=%qHandle.sqlcol1 } }
+		If 'SQLCODE { Set RowSet=RowSet_$lb(c1),ReturnCount=ReturnCount+1 Quit:(ReturnCount=FetchCount)||(($l(RowSet)+($l(RowSet)\ReturnCount))>30000) } Else { Set AtEnd=1 Quit }
+	}
+	If 'SQLCODE { Set sc=1 } ElseIf SQLCODE=100 { Set sc=1 Set:$isobject($g(%sqlcontext)) %sqlcontext.%SQLCODE=SQLCODE,%sqlcontext.%ROWCOUNT=$g(%ROWCOUNT) } Else { Set:$isobject($g(%sqlcontext)) %sqlcontext.%SQLCODE=SQLCODE,%sqlcontext.Message=$g(%msg) Set sc=$$Error^%apiOBJ(5540,SQLCODE,$get(%msg)) }
+	Quit sc }
+zExtentSendODBC(%qHandle,array,qacn,%qrc,piece,ColumnCount) [ SQLCODE ] public { New %ROWCOUNT,%ROWID,%msg,SQLCODE 
+	set %qrc=0,piece=0
+	for {
+		set rc=..ExtentFetch(.%qHandle,.row,.atend)
+		if ('rc) { set %qrc=-400 set:$isobject($get(%sqlcontext)) %sqlcontext.SQLCode=-400,%sqlcontext.Message=$g(%msg) do ProcessError^%ourProcedure(rc,$get(%sqlcontext),.%qrc,.%msg),Logerr^%SYS.SQLSRV(%qrc,"","SP",.%msg) RETURN  }
+		if row="" { set %qrc=100 set:$isobject($get(%sqlcontext)) %sqlcontext.SQLCode=100 RETURN  }
+		RETURN:$zobjexport(row,60)
+	}
+	RETURN }
+ q
+%0dsqlD()	n %xxsql,%xxoref
+	s %xxsql("S",1)="DECLARE QExtent CURSOR FOR SELECT ID "
+	s %xxsql("S",2)="INTO  :i%sqlcol1"
+	s %xxsql("S",3)="FROM KafkaBank . Trans"
+	s %xxsql("M","%occSqlfuncinc")=$c(1),%xxsql("I","%PVA")="",%xxsql("I","%callout")="",%xxsql("I","%jsonMap")="",%xxsql("I","%occSqlfunc")=""
+	s %xxsql("I","%systemInclude")="",%xxsql("NS")="KAFKABANK",%xxsql("PToolsCTI")=$LB(,"-1:0:0::0:1")
+	s %xxoref=$$BuildQuery^%SYS.SQLSRV(.%xxsql,$lb("Runtime","","","KafkaBank",0,"",),",1,QExtent,","KafkaBank.Trans.CLS",1)
+	q %xxoref
+zExtentFunc() public {
+	try {
+		set tSchemaPath = ##class(%SQL.Statement).%ClassPath($classname())
+			set tStatement = ##class(%SQL.Statement).%New(,tSchemaPath)
+			do tStatement.prepare(" SELECT ID FROM KafkaBank . Trans")
+		set tResult = tStatement.%Execute()
+	}
+	catch tException { if '$Isobject($Get(tResult)) { set tResult = ##class(%SQL.StatementResult).%New() } set tResult.%SQLCODE=tException.AsSQLCODE(),tResult.%Message=tException.AsSQLMessage() }
+	Quit tResult }
+zExtentGetInfo(colinfo,parminfo,idinfo,%qHandle,extoption=0,extinfo) public {
+ s parminfo=""
+	s:'($d(^oddCOM($classname(),"q","Extent",21),clientinfo)#2)&&'$s($d(^(2),clientinfo)#2&&(clientinfo'=$classname()):$d(^oddCOM(clientinfo,"q","Extent",21),clientinfo)#2||($d(^oddDEF(clientinfo,"q","Extent",21),clientinfo)#2),1:$d(^oddDEF($classname(),"q","Extent",21),clientinfo)#2) clientinfo=""
+	Set:extoption extinfo=$s($d(^oddCOM($classname(),"q","Extent",38))#2:^(38),$d(^oddCOM($g(^(2),$classname()),"q","Extent",38))#2:^(38),1:$s($d(^oddDEF($g(^oddCOM($classname(),"q","Extent",2),$classname()),"q","Extent",38))#2:^(38),1:""))
+	If clientinfo'="" Set colinfo=$listget(clientinfo,1),parminfo=$listget(clientinfo,2),idinfo=$listget(clientinfo,3) Quit 1
+	Set colinfo="",parminfo="",idinfo=$listbuild(0)
+	Set sc=$$externaltype^%apiOLE("%Library.Integer",.exttypes,"0")
+	Quit:('sc) sc
+	s:'($d(^oddCOM($classname(),"q","Extent",23),names)#2)&&'$s($d(^(2),names)#2&&(names'=$classname()):$d(^oddCOM(names,"q","Extent",23),names)#2||($d(^oddDEF(names,"q","Extent",23),names)#2),1:$d(^oddDEF($classname(),"q","Extent",23),names)#2) names=""
+	s:'($d(^oddCOM($classname(),"q","Extent",22),captions)#2)&&'$s($d(^(2),captions)#2&&(captions'=$classname()):$d(^oddCOM(captions,"q","Extent",22),captions)#2||($d(^oddDEF(captions,"q","Extent",22),captions)#2),1:$d(^oddDEF($classname(),"q","Extent",22),captions)#2) captions=""
+	For i=1:1:1 Set colinfo=colinfo_$listbuild($listbuild($listget(names,i),$piece(exttypes,",",i),$listget(captions,i)))
+	Set idinfo=$listbuild(1,$classname())
+	s ^oddCOM($classname(),"q","Extent",21)=$listbuild(colinfo,parminfo,idinfo)
+	Quit 1 }
+zExtentGetODBCInfo(colinfo,parminfo,qHandle)
+	Set metadata=$lb(1,1,"ID",4,10,0,2,"ID","Trans","KafkaBank","",$c(0,0,0,0,0,0,0,0,0,0,0,1,0),0)
+	Set colcount=$li(metadata,2),cmdlen=colcount*10,parmcount=$li(metadata,3+cmdlen),pmdlen=parmcount*6,parminfo=$li(metadata,cmdlen+3,cmdlen+pmdlen+3)
+	Set colinfo=$li(metadata,2,2+cmdlen)
+	Quit 1
+zIDKEYCheck(K1,lockonly=0,concurrency=-1) public {
+	s id=K1,exists=..%ExistsId(id) q:'exists $s('lockonly:$$Error^%apiOBJ(5797,$classname(),"IDKEY",id),1:1) s:concurrency=-1 concurrency=$select(..#DEFAULTCONCURRENCY="$zu(115,10)":$zu(115,10),1:$xecute("q "_..#DEFAULTCONCURRENCY)) if concurrency { s status=..%LockId(id,1) q:('status) status } if 'lockonly { s exists=..%ExistsId(id) d:concurrency ..%UnlockId(id,1,0) quit $s('exists:$$Error^%apiOBJ(5797,$classname(),"IDKEY",id),1:1) } else { d:concurrency ..%UnlockId(id,1,0) q 1 }
+}
+zIDKEYDelete(K1,concurrency=-1) public {
+	Quit ..%DeleteId(.K1,concurrency) }
+zIDKEYExists(K1,id="") public {
+	s id=K1 q ..%ExistsId(K1) }
+zIDKEYOpen(K1,concurrency=-1,sc) public { s:'($d(sc)#2) sc=1
+	Quit ..%OpenId(.K1,concurrency,.sc) }
+zIDKEYSQLCheckUnique(pFromOrig=0,%pID,%pVals...)
+ QUIT $$Error^%apiOBJ(5758,"%Persistent::IDKEYSQLCheckUnique")
+zIDKEYSQLExists(pLockOnly=0,pUnlockRef,%pVal...)
+	// SQL Foreign Key validation entry point for Key IDKEY.  Called by FKeys that reference this Key to see if the row is defined
+	if pLockOnly>=0 { new id set id=%pVal(1) }
+	if pLockOnly>=0 { if '..%SQLGetLock(id,1,.pUnlockRef) { set sqlcode=-114,%msg=$$FormatMessage^%occMessages(,"%SQL.Filer","SQLFiler39",,"KafkaBank"_"."_"Trans"_":"_"IDKEY") QUIT 0 } }
+	if pLockOnly<1 {
+		new qv set qv=$d(^KafkaBank.TransD(%pVal(1))) QUIT:pLockOnly=-1 qv
+		do:'$g(pUnlockRef) ..%SQLReleaseLock(id,1) quit qv
+	}
+	else { do:'$g(pUnlockRef) ..%SQLReleaseLock(id,1) QUIT 1 }
+	Return
+zIDKEYSQLFindPKeyByConstraint(%con)
+ QUIT $$Error^%apiOBJ(5758,"%Persistent::IDKEYSQLFindPKeyByConstraint")
+zIDKEYSQLFindRowIDByConstraint(%con,pInternal=0)
+ QUIT $$Error^%apiOBJ(5758,"%Persistent::IDKEYSQLFindRowIDByConstraint")
+%sqllistUCQ(t) public	{
+	s t("%0dsqlA")="",t("%0dsqlD")=""
+}

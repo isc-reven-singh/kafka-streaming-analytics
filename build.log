@@ -1,0 +1,592 @@
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 2B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/intersystemsdc/iris-community:latest
+#3 DONE 8.7s
+
+#4 [ 1/13] FROM docker.io/intersystemsdc/iris-community:latest@sha256:9853d490db42f1e77a79c1defe241c4ef763c99b88320b82cde2f5e57a4e1ecd
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 18.34kB 0.0s done
+#5 DONE 0.0s
+
+#6 [ 4/13] COPY Installer.cls .
+#6 CACHED
+
+#7 [ 2/13] WORKDIR /opt/kafka
+#7 CACHED
+
+#8 [ 3/13] RUN chown irisowner:irisowner /opt/kafka
+#8 CACHED
+
+#9 [ 5/13] COPY src /usr/irissys/mgr/src
+#9 CACHED
+
+#10 [ 6/13] RUN chown -R irisowner:irisowner /usr/irissys/mgr/src
+#10 CACHED
+
+#11 [ 7/13] COPY iris.script /tmp/iris.script
+#11 DONE 0.0s
+
+#12 [ 8/13] RUN mkdir /irisdata
+#12 DONE 0.2s
+
+#13 [ 9/13] RUN chown irisowner:irisowner /irisdata
+#13 DONE 0.2s
+
+#14 [10/13] RUN mkdir /kafka
+#14 DONE 0.5s
+
+#15 [11/13] COPY kafka /kafka
+#15 DONE 0.2s
+
+#16 [12/13] RUN chown irisowner:irisowner /kafka
+#16 DONE 0.2s
+
+#17 [13/13] RUN iris start IRIS 	&& iris session IRIS < /tmp/iris.script
+#17 0.250 Using 'iris.cpf' configuration file
+#17 0.371 
+#17 0.458 Starting Control Process
+#17 0.458 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.458 Allocated 2473MB shared memory
+#17 0.458 1989MB global buffers, 198MB routine buffers
+#17 0.458 Starting Control Process
+#17 0.458 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.458 Allocated 2473MB shared memory
+#17 0.458 1989MB global buffers, 198MB routine buffers
+#17 0.458 Starting Control Process
+#17 0.458 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.458 Allocated 2473MB shared memory
+#17 0.458 1989MB global buffers, 198MB routine buffers
+#17 0.459 Starting Control Process
+#17 0.459 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.459 Allocated 2473MB shared memory
+#17 0.459 1989MB global buffers, 198MB routine buffers
+#17 0.460 Starting Control Process
+#17 0.460 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.460 Allocated 2473MB shared memory
+#17 0.460 1989MB global buffers, 198MB routine buffers
+#17 0.462 Starting Control Process
+#17 0.462 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.462 Allocated 2473MB shared memory
+#17 0.462 1989MB global buffers, 198MB routine buffers
+#17 0.470 Starting Control Process
+#17 0.470 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.470 Allocated 2473MB shared memory
+#17 0.470 1989MB global buffers, 198MB routine buffers
+#17 0.471 Starting Control Process
+#17 0.471 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.471 Allocated 2473MB shared memory
+#17 0.471 1989MB global buffers, 198MB routine buffers
+#17 0.480 Starting Control Process
+#17 0.480 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.480 Allocated 2473MB shared memory
+#17 0.480 1989MB global buffers, 198MB routine buffers
+#17 0.480 Starting Control Process
+#17 0.480 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.480 Allocated 2473MB shared memory
+#17 0.480 1989MB global buffers, 198MB routine buffers
+#17 0.481 Starting Control Process
+#17 0.481 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.481 Allocated 2473MB shared memory
+#17 0.481 1989MB global buffers, 198MB routine buffers
+#17 0.481 Starting Control Process
+#17 0.481 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.481 Allocated 2473MB shared memory
+#17 0.481 1989MB global buffers, 198MB routine buffers
+#17 0.485 Starting Control Process
+#17 0.485 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.485 Allocated 2473MB shared memory
+#17 0.485 1989MB global buffers, 198MB routine buffers
+#17 0.485 Starting Control Process
+#17 0.485 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.485 Allocated 2473MB shared memory
+#17 0.485 1989MB global buffers, 198MB routine buffers
+#17 0.490 Starting Control Process
+#17 0.490 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.490 Allocated 2473MB shared memory
+#17 0.490 1989MB global buffers, 198MB routine buffers
+#17 0.490 Starting Control Process
+#17 0.490 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.490 Allocated 2473MB shared memory
+#17 0.490 1989MB global buffers, 198MB routine buffers
+#17 0.496 Starting Control Process
+#17 0.496 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.496 Allocated 2473MB shared memory
+#17 0.496 1989MB global buffers, 198MB routine buffers
+#17 0.496 Starting Control Process
+#17 0.496 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.496 Allocated 2473MB shared memory
+#17 0.496 1989MB global buffers, 198MB routine buffers
+#17 0.496 Starting Control Process
+#17 0.496 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.496 Allocated 2473MB shared memory
+#17 0.496 1989MB global buffers, 198MB routine buffers
+#17 0.497 Starting Control Process
+#17 0.497 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.497 Allocated 2473MB shared memory
+#17 0.497 1989MB global buffers, 198MB routine buffers
+#17 0.497 Starting Control Process
+#17 0.497 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.497 Allocated 2473MB shared memory
+#17 0.497 1989MB global buffers, 198MB routine buffers
+#17 0.497 Starting Control Process
+#17 0.497 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.497 Allocated 2473MB shared memory
+#17 0.497 1989MB global buffers, 198MB routine buffers
+#17 0.501 Starting Control Process
+#17 0.501 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.501 Allocated 2473MB shared memory
+#17 0.501 1989MB global buffers, 198MB routine buffers
+#17 0.502 Starting Control Process
+#17 0.502 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.502 Allocated 2473MB shared memory
+#17 0.502 1989MB global buffers, 198MB routine buffers
+#17 0.503 Starting Control Process
+#17 0.503 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.503 Allocated 2473MB shared memory
+#17 0.503 1989MB global buffers, 198MB routine buffers
+#17 0.503 Starting Control Process
+#17 0.503 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.503 Allocated 2473MB shared memory
+#17 0.503 1989MB global buffers, 198MB routine buffers
+#17 0.504 Starting Control Process
+#17 0.504 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.504 Allocated 2473MB shared memory
+#17 0.504 1989MB global buffers, 198MB routine buffers
+#17 0.504 Starting Control Process
+#17 0.504 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.504 Allocated 2473MB shared memory
+#17 0.504 1989MB global buffers, 198MB routine buffers
+#17 0.504 Starting Control Process
+#17 0.504 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.504 Allocated 2473MB shared memory
+#17 0.504 1989MB global buffers, 198MB routine buffers
+#17 0.504 Starting Control Process
+#17 0.504 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.504 Allocated 2473MB shared memory
+#17 0.504 1989MB global buffers, 198MB routine buffers
+#17 0.505 Starting Control Process
+#17 0.505 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.505 Allocated 2473MB shared memory
+#17 0.505 1989MB global buffers, 198MB routine buffers
+#17 0.505 Starting Control Process
+#17 0.505 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.505 Allocated 2473MB shared memory
+#17 0.505 1989MB global buffers, 198MB routine buffers
+#17 0.506 Starting Control Process
+#17 0.506 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.506 Allocated 2473MB shared memory
+#17 0.506 1989MB global buffers, 198MB routine buffers
+#17 0.506 Starting Control Process
+#17 0.506 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.506 Allocated 2473MB shared memory
+#17 0.506 1989MB global buffers, 198MB routine buffers
+#17 0.506 Starting Control Process
+#17 0.506 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.506 Allocated 2473MB shared memory
+#17 0.506 1989MB global buffers, 198MB routine buffers
+#17 0.507 Starting Control Process
+#17 0.507 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.507 Allocated 2473MB shared memory
+#17 0.507 1989MB global buffers, 198MB routine buffers
+#17 0.507 Starting Control Process
+#17 0.507 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.507 Allocated 2473MB shared memory
+#17 0.507 1989MB global buffers, 198MB routine buffers
+#17 0.507 Starting Control Process
+#17 0.507 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.507 Allocated 2473MB shared memory
+#17 0.507 1989MB global buffers, 198MB routine buffers
+#17 0.508 Starting Control Process
+#17 0.508 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.508 Allocated 2473MB shared memory
+#17 0.508 1989MB global buffers, 198MB routine buffers
+#17 0.508 Starting Control Process
+#17 0.508 Global buffer setting requires attention.  Auto-selected 25% of total memory.
+#17 0.508 Allocated 2473MB shared memory
+#17 0.508 1989MB global buffers, 198MB routine buffers
+#17 0.637 This copy of InterSystems IRIS has been licensed for use exclusively by:
+#17 0.637 InterSystems IRIS Community
+#17 0.637 Copyright (c) 1986-2022 by InterSystems Corporation
+#17 0.637 Any other use is a violation of your license agreement
+#17 3.290 Starting IRIS
+#17 3.290 
+#17 3.295 
+#17 3.295 Node: buildkitsandbox, Instance: IRIS
+#17 3.296 
+#17 3.296 USER>
+#17 3.297 
+#17 3.297 USER>
+#17 3.298 
+#17 3.298 Load started on 09/07/2022 16:34:54
+#17 3.298 Loading file /opt/kafka/Installer.cls as udl
+#17 3.360 Compiling class App.Installer
+#17 3.365 Compiling routine App.Installer.1
+#17 3.365 Load finished successfully.
+#17 3.365 
+#17 3.365 USER>
+#17 3.367 2022-09-07 16:34:54 0 App.Installer: Installation starting at 2022-09-07 16:34:54, LogLevel=3
+#17 3.367 2022-09-07 16:34:54 3 Evaluate: #{$system.Process.CurrentDirectory()}src -> /usr/irissys/mgr/src
+#17 3.367 2022-09-07 16:34:54 3 SetVariable: SourceDir=/usr/irissys/mgr/src
+#17 3.367 2022-09-07 16:34:54 3 SetVariable: Namespace=KAFKABANK
+#17 3.367 2022-09-07 16:34:54 3 SetVariable: app=kafka
+#17 3.367 2022-09-07 16:34:54 3 Evaluate: ${Namespace} -> KAFKABANK
+#17 3.367 2022-09-07 16:34:54 3 Evaluate: ${Namespace} -> KAFKABANK
+#17 3.367 2022-09-07 16:34:54 3 Evaluate: ${Namespace} -> KAFKABANK
+#17 3.367 2022-09-07 16:34:54 3 Evaluate: ${Namespace} -> KAFKABANK
+#17 3.367 2022-09-07 16:34:54 3 Evaluate: /opt/${app}/data -> /opt/kafka/data
+#17 3.368 2022-09-07 16:34:54 3 Evaluate: %DB_${Namespace} -> %DB_KAFKABANK
+#17 3.368 2022-09-07 16:34:54 1 CreateDatabase: Creating database KAFKABANK in /opt/kafka/data/ with resource %DB_KAFKABANK
+#17 3.368 2022-09-07 16:34:54 2 CreateDatabase: Overwriting /opt/kafka/data/IRIS.DAT
+#17 3.374 2022-09-07 16:34:54 2 CreateDatabase: Adding database KAFKABANK
+#17 3.708 2022-09-07 16:34:54 2 CreateDatabase: Creating and assigning resource '%DB_KAFKABANK' to KAFKABANK
+#17 3.710 2022-09-07 16:34:54 1 CreateNamespace: Creating namespace KAFKABANK using KAFKABANK/KAFKABANK
+#17 3.711 2022-09-07 16:34:54 2 CreateNamespace: Adding namespace KAFKABANK
+#17 3.768 2022-09-07 16:34:54 1 ActivateConfiguration: Activating Configuration
+#17 3.804 2022-09-07 16:34:54 1 EnableEnsemble: Enabling KAFKABANK
+#17 3.804 
+#17 3.804       - Class:
+#17 3.805         + Adding class mapping Ens -> ENSLIB
+#17 3.806         + Adding class mapping EnsLib -> ENSLIB
+#17 3.808         + Adding class mapping EnsPortal -> ENSLIB
+#17 3.810         + Adding class mapping CSPX.Dashboard -> ENSLIB
+#17 3.811       - Routine:
+#17 3.811         + Adding routine mapping Ens* -> ENSLIB
+#17 3.813       - Global:
+#17 3.818         + Creating new global directory entry for ^EnsDICOM.Dictionary
+#17 3.819         + Creating new global directory entry for ^EnsEDI.Description
+#17 3.819         + Creating new global directory entry for ^EnsEDI.Schema
+#17 3.820         + Creating new global directory entry for ^EnsEDI.X12.Description
+#17 3.820         + Creating new global directory entry for ^EnsEDI.X12.Schema
+#17 3.821         + Creating new global directory entry for ^IRIS.Msg
+#17 3.821         + Creating new global directory entry for ^IRIS.MsgNames
+#17 3.822         + Adding global mapping ^EnsDICOM.Dictionary -> ENSLIB
+#17 3.823         + Adding global mapping ^EnsEDI.Description("X","X12") -> ENSLIB
+#17 3.827         + Adding global mapping ^EnsEDI.Schema("HIPAA_4010") -> ENSLIB
+#17 3.831         + Adding global mapping ^EnsEDI.Schema("HIPAA_5010") -> ENSLIB
+#17 3.833         + Adding global mapping ^EnsEDI.Schema("ISC_00401") -> ENSLIB
+#17 3.835         + Adding global mapping ^EnsEDI.Schema("ISC_00405") -> ENSLIB
+#17 3.837         + Adding global mapping ^EnsEDI.X12.Description("HIPAA_4010") -> ENSLIB
+#17 3.841         + Adding global mapping ^EnsEDI.X12.Description("HIPAA_5010") -> ENSLIB
+#17 3.843         + Adding global mapping ^EnsEDI.X12.Schema("HIPAA_4010") -> ENSLIB
+#17 3.846         + Adding global mapping ^EnsEDI.X12.Schema("HIPAA_5010") -> ENSLIB
+#17 3.848         + Adding global mapping ^IRIS.Msg("Arial,Tahoma,Verdana") -> ENSLIB
+#17 3.851         + Adding global mapping ^IRIS.Msg("Confirm") -> ENSLIB
+#17 3.854         + Adding global mapping ^IRIS.Msg("EDIDocumentView") -> ENSLIB
+#17 3.856         + Adding global mapping ^IRIS.Msg("ENSEMBLE") -> ENSLIB
+#17 3.858         + Adding global mapping ^IRIS.Msg("Ens") -> ENSLIB
+#17 3.860         + Adding global mapping ^IRIS.Msg("EnsAlert") -> ENSLIB
+#17 3.863         + Adding global mapping ^IRIS.Msg("EnsBPL") -> ENSLIB
+#17 3.865         + Adding global mapping ^IRIS.Msg("EnsColumns") -> ENSLIB
+#17 3.867         + Adding global mapping ^IRIS.Msg("EnsDICOM") -> ENSLIB
+#17 3.869         + Adding global mapping ^IRIS.Msg("EnsEDI") -> ENSLIB
+#17 3.872         + Adding global mapping ^IRIS.Msg("EnsEDIEDIFACT") -> ENSLIB
+#17 3.874         + Adding global mapping ^IRIS.Msg("EnsEDIHL7") -> ENSLIB
+#17 3.877         + Adding global mapping ^IRIS.Msg("EnsEDISEF") -> ENSLIB
+#17 3.879         + Adding global mapping ^IRIS.Msg("EnsEDIX12") -> ENSLIB
+#17 3.882         + Adding global mapping ^IRIS.Msg("EnsEnt") -> ENSLIB
+#17 3.886         + Adding global mapping ^IRIS.Msg("EnsLDAP") -> ENSLIB
+#17 3.890         + Adding global mapping ^IRIS.Msg("EnsMQTT") -> ENSLIB
+#17 3.901         + Adding global mapping ^IRIS.Msg("EnsPushNotifications") -> ENSLIB
+#17 3.920         + Adding global mapping ^IRIS.Msg("EnsRecordMap") -> ENSLIB
+#17 3.939         + Adding global mapping ^IRIS.Msg("EnsSAP") -> ENSLIB
+#17 3.945         + Adding global mapping ^IRIS.Msg("EnsSR") -> ENSLIB
+#17 3.953         + Adding global mapping ^IRIS.Msg("EnsSearchTable") -> ENSLIB
+#17 3.964         + Adding global mapping ^IRIS.Msg("EnsWf") -> ENSLIB
+#17 3.973         + Adding global mapping ^IRIS.Msg("EnsXPATH") -> ENSLIB
+#17 3.981         + Adding global mapping ^IRIS.Msg("EnsebXML") -> ENSLIB
+#17 3.985         + Adding global mapping ^IRIS.Msg("Ensemble") -> ENSLIB
+#17 3.992         + Adding global mapping ^IRIS.Msg("ITK") -> ENSLIB
+#17 3.998         + Adding global mapping ^IRIS.Msg("RuleEditor") -> ENSLIB
+#17 4.002         + Adding global mapping ^IRIS.Msg("Workflow") -> ENSLIB
+#17 4.006         + Adding global mapping ^IRIS.Msg("tahoma,verdana") -> ENSLIB
+#17 4.015         + Adding global mapping ^IRIS.MsgNames("Arial,Tahoma,Verdana") -> ENSLIB
+#17 4.023         + Adding global mapping ^IRIS.MsgNames("Confirm") -> ENSLIB
+#17 4.027         + Adding global mapping ^IRIS.MsgNames("EDIDocumentView") -> ENSLIB
+#17 4.032         + Adding global mapping ^IRIS.MsgNames("ENSEMBLE") -> ENSLIB
+#17 4.035         + Adding global mapping ^IRIS.MsgNames("Ens") -> ENSLIB
+#17 4.038         + Adding global mapping ^IRIS.MsgNames("EnsAlert") -> ENSLIB
+#17 4.042         + Adding global mapping ^IRIS.MsgNames("EnsBPL") -> ENSLIB
+#17 4.047         + Adding global mapping ^IRIS.MsgNames("EnsColumns") -> ENSLIB
+#17 4.053         + Adding global mapping ^IRIS.MsgNames("EnsDICOM") -> ENSLIB
+#17 4.057         + Adding global mapping ^IRIS.MsgNames("EnsEDI") -> ENSLIB
+#17 4.061         + Adding global mapping ^IRIS.MsgNames("EnsEDIEDIFACT") -> ENSLIB
+#17 4.068         + Adding global mapping ^IRIS.MsgNames("EnsEDIHL7") -> ENSLIB
+#17 4.072         + Adding global mapping ^IRIS.MsgNames("EnsEDISEF") -> ENSLIB
+#17 4.075         + Adding global mapping ^IRIS.MsgNames("EnsEDIX12") -> ENSLIB
+#17 4.078         + Adding global mapping ^IRIS.MsgNames("EnsEnt") -> ENSLIB
+#17 4.080         + Adding global mapping ^IRIS.MsgNames("EnsLDAP") -> ENSLIB
+#17 4.083         + Adding global mapping ^IRIS.MsgNames("EnsMQTT") -> ENSLIB
+#17 4.086         + Adding global mapping ^IRIS.MsgNames("EnsPushNotifications") -> ENSLIB
+#17 4.089         + Adding global mapping ^IRIS.MsgNames("EnsRecordMap") -> ENSLIB
+#17 4.092         + Adding global mapping ^IRIS.MsgNames("EnsSAP") -> ENSLIB
+#17 4.094         + Adding global mapping ^IRIS.MsgNames("EnsSR") -> ENSLIB
+#17 4.097         + Adding global mapping ^IRIS.MsgNames("EnsSearchTable") -> ENSLIB
+#17 4.099         + Adding global mapping ^IRIS.MsgNames("EnsWf") -> ENSLIB
+#17 4.101         + Adding global mapping ^IRIS.MsgNames("EnsXPATH") -> ENSLIB
+#17 4.103         + Adding global mapping ^IRIS.MsgNames("EnsebXML") -> ENSLIB
+#17 4.106         + Adding global mapping ^IRIS.MsgNames("Ensemble") -> ENSLIB
+#17 4.108         + Adding global mapping ^IRIS.MsgNames("ITK") -> ENSLIB
+#17 4.111         + Adding global mapping ^IRIS.MsgNames("RuleEditor") -> ENSLIB
+#17 4.115         + Adding global mapping ^IRIS.MsgNames("Workflow") -> ENSLIB
+#17 4.118         + Adding global mapping ^IRIS.MsgNames("tahoma,verdana") -> ENSLIB
+#17 4.121       - Updating CPF
+#17 4.140       - Moving changes to active configuration
+#17 4.150        - Loading new mappings for namespace 'KAFKABANK'
+#17 4.264       - Configuring portal: /csp/kafkabank [KAFKABANK] using /usr/irissys/csp/kafkabank
+#17 4.264       - Creating directory: /usr/irissys/csp/kafkabank
+#17 4.266       - Creating CSP Application: /csp/kafkabank
+#17 4.267           Name                 = [/csp/kafkabank]
+#17 4.267           AutheEnabled         = [36]
+#17 4.267           Enabled              = [1]
+#17 4.267           Description          = [Interoperability Management Portal]
+#17 4.267           Resource             = [%Ens_Portal]
+#17 4.267           AutoCompile          = [0]
+#17 4.267           Timeout              = [900]
+#17 4.267           Path                 = [/usr/irissys/csp/kafkabank]
+#17 4.267           Recurse              = [1]
+#17 4.267           LoginPage            = []
+#17 4.267           InbndWebServicesEnabled = [1]
+#17 4.267           TwoFactorEnabled     = [0]
+#17 4.267           IsNameSpaceDefault   = [0]
+#17 4.267           PermittedClasses     = []
+#17 4.267           MatchRoles           = []
+#17 4.267           Type                 = [2]
+#17 4.267           CookiePath           = [/csp/kafkabank/]
+#17 4.268           LockCSPName          = [1]
+#17 4.268           NameSpace            = [KAFKABANK]
+#17 4.268           CSPZENEnabled        = [1]
+#17 4.268           GroupById            = [%ISCMgtPortal]
+#17 4.268           ServeFiles           = [2]
+#17 4.268           UseCookies           = [2]
+#17 4.272       - Removing legacy CSP pages and files from directory '/usr/irissys/csp/kafkabank/'
+#17 4.284       - Adding SQL privileges for role '%EnsRole_Administrator'
+#17 4.335       - Adding SQL privileges for role '%EnsRole_AlertOperator'
+#17 4.335       - Adding SQL privileges for role '%EnsRole_Developer'
+#17 4.336       - Adding SQL privileges for role '%EnsRole_Monitor'
+#17 4.337       - Adding SQL privileges for role '%EnsRole_Operator'
+#17 4.344       - Adding SQL privileges for role '%EnsRole_RegistryManager'
+#17 4.348       - Adding SQL privileges for role '%EnsRole_RegistrySelect'
+#17 4.349       - Adding SQL privileges for role '%EnsRole_RulesDeveloper'
+#17 4.350       - Adding SQL privileges for role '%EnsRole_TempSQLDict'
+#17 4.350       - Adding SQL privileges for role '%EnsRole_WebDeveloper'
+#17 4.354     * Adding Interoperability SearchTables
+#17 4.354       - Validating all SearchTable metadata
+#17 4.377         - Regenerating metadata for EnsLib.EDI.EDIFACT.SearchTable
+#17 4.412         - Regenerating metadata for EnsLib.EDI.X12.SearchTable
+#17 4.414         - Regenerating metadata for EnsLib.EDI.XML.SearchTable
+#17 4.417         - Regenerating metadata for EnsLib.XML.SearchTable
+#17 4.419     * Checking for existing named message searches
+#17 4.420       - No saved message searches found in namespace 'KAFKABANK'; no conversion necessary.
+#17 4.420     * Checking DocClassMap
+#17 4.421           - Added DocClassMap for class 'EnsLib.EDI.EDIFACT.SearchTable' with DOCCLASS 'EnsLib.EDI.EDIFACT.Document'
+#17 4.421           - Added DocClassMap for class 'EnsLib.EDI.X12.SearchTable' with DOCCLASS 'EnsLib.EDI.X12.Document'
+#17 4.421           - Added DocClassMap for class 'EnsLib.EDI.XML.SearchTable' with DOCCLASS 'EnsLib.EDI.XML.Document'
+#17 4.422           - Added DocClassMap for class 'EnsLib.XML.SearchTable' with DOCCLASS 'Ens.StreamContainer'
+#17 4.422     * Checking for incorrect Timestamp indices
+#17 4.422       - No UTC index globals need to be repaired.
+#17 4.422     - Setting initial default Purge Settings
+#17 4.422     * Legacy CSP Portal not installed, so no legacy CSP pages recompiled.
+#17 4.422     * Generating meta data for Interoperability Analytics items
+#17 4.462     Importing: Ens/Analytics/ActivityVolumeAndDuration.dashboard
+#17 4.569 
+#17 4.569 Imported 1 item.
+#17 4.569 Encountered 0 errors during import.
+#17 4.572 
+#17 4.572     * Setting new namespace flags
+#17 4.572     - Enabling SyncCommit for Business Services2022-09-07 16:34:55 1 ActivateConfiguration: Activating Configuration
+#17 4.635 2022-09-07 16:34:55 3 Evaluate: ${SourceDir} -> /usr/irissys/mgr/src
+#17 4.635 2022-09-07 16:34:55 1 Import: Loading /usr/irissys/mgr/src (isdir=1) into KAFKABANK, recurse=1
+#17 4.635 
+#17 4.635 Load of directory started on 09/07/2022 16:34:55
+#17 4.679 
+#17 4.679 Loading file /usr/irissys/mgr/src/KafkaBank-TransactionsDashboard.xml as xml
+#17 4.679 Imported document: KafkaBank-FraudFilter.pivot.DFI
+#17 4.679 Imported document: KafkaBank-FraudFilterListing.pivot.DFI
+#17 4.679 Imported document: KafkaBank-TransactionsDashboard.dashboard.DFI
+#17 4.695 Loading file /usr/irissys/mgr/src/KafkaBank/KafkaCubeRegistry.cls as udl
+#17 4.711 Loading file /usr/irissys/mgr/src/KafkaBank/Cubes/BankTrans.cls as udl
+#17 4.712 Loading file /usr/irissys/mgr/src/KafkaBank/Trans.cls as udl
+#17 4.728 Loading file /usr/irissys/mgr/src/KafkaBank/Cubes/BankTrans/Listing.cls as udl
+#17 4.736 Loading file /usr/irissys/mgr/src/KafkaBank/Cubes/BankTrans/Starcategory.cls as udl
+#17 4.749 Loading file /usr/irissys/mgr/src/KafkaBank/Cubes/BankTrans/Starccnum.cls as udl
+#17 4.765 Loading file /usr/irissys/mgr/src/KafkaBank/Cubes/BankTrans/Stardob.cls as udl
+#17 4.768 Loading file /usr/irissys/mgr/src/KafkaBank/Cubes/BankTrans/Starcity.cls as udl
+#17 4.776 Loading file /usr/irissys/mgr/src/KafkaBank/Cubes/BankTrans/Fact.cls as udl
+#17 4.789 Loading file /usr/irissys/mgr/src/KafkaBank/Cubes/BankTrans/Stargender.cls as udl
+#17 4.789 Loading file /usr/irissys/mgr/src/KafkaBank/Cubes/BankTrans/Starfirst.cls as udl
+#17 4.803 Loading file /usr/irissys/mgr/src/KafkaBank/Cubes/BankTrans/Starisfraud.cls as udl
+#17 4.819 Loading file /usr/irissys/mgr/src/KafkaBank/Cubes/BankTrans/Starjob.cls as udl
+#17 4.832 Loading file /usr/irissys/mgr/src/KafkaBank/Cubes/BankTrans/Starlast.cls as udl
+#17 4.835 Loading file /usr/irissys/mgr/src/KafkaBank/Cubes/BankTrans/Starmerchant.cls as udl
+#17 4.843 Loading file /usr/irissys/mgr/src/KafkaBank/Cubes/BankTrans/Starstate.cls as udl
+#17 4.848 Loading file /usr/irissys/mgr/src/KafkaBank/Cubes/BankTrans/Starstreet.cls as udl
+#17 4.850 Loading file /usr/irissys/mgr/src/KafkaBank/Trans/1.int as udl
+#17 4.850 KafkaBank.Trans.1.INT Loaded
+#17 4.859 Loading file /usr/irissys/mgr/src/KafkaBank/Cubes/BankTrans/Startransdatetime.cls as udl
+#17 4.870 Loading file /usr/irissys/mgr/src/KafkaBank/Cubes/BankTrans/Starzip.cls as udl
+#17 4.881 Loading file /usr/irissys/mgr/src/KafkaBank/Stream/Production.cls as udl
+#17 4.885 Loading file /usr/irissys/mgr/src/KafkaBank/Utils/Scheduler.cls as udl
+#17 4.890 Loading file /usr/irissys/mgr/src/KafkaBank/Utils/Task.cls as udl
+#17 4.896 Loading file /usr/irissys/mgr/src/KafkaBank/Stream/Production/ProcessTransactions.cls as udl
+#17 4.896 
+#17 4.896 Compilation started on 09/07/2022 16:34:55 with qualifiers 'ck'
+#17 4.897 Compiling routine : KafkaBank.Trans.1.int
+#17 4.909 Compiling 7 classes
+#17 4.925 Compiling class KafkaBank.KafkaCubeRegistry
+#17 4.927 Compiling class KafkaBank.Utils.Scheduler
+#17 4.983 Compiling class KafkaBank.Utils.Task
+#17 4.987 Compiling class KafkaBank.Stream.Production
+#17 5.022 Compiling class KafkaBank.Trans
+#17 5.073 Compiling class KafkaBank.Stream.Production.ProcessTransactions
+#17 5.107 Compiling table KafkaBank_Stream_Production.ProcessTransactions_MasterPendingResponses
+#17 5.107 Compiling table KafkaBank_Stream_Production.ProcessTransactions_MessagesSent
+#17 5.108 Compiling table KafkaBank_Stream_Production.ProcessTransactions_MessagesReceived
+#17 5.112 Compiling table KafkaBank.Trans
+#17 5.114 Compiling table KafkaBank_Stream_Production.ProcessTransactions
+#17 5.145 Compiling routine KafkaBank.Stream.Production.1
+#17 5.146 Compiling routine KafkaBank.Utils.Scheduler.1
+#17 5.149 Compiling routine KafkaBank.Utils.Task.1
+#17 5.182 Compiling routine KafkaBank.Stream.Production.ProcessTransactionsMasterPendingResponses.1
+#17 5.182 Compiling routine KafkaBank.Stream.Production.ProcessTransactionsMessagesSent.1
+#17 5.184 Compiling routine KafkaBank.Stream.Production.ProcessTransactionsMessagesReceived.1
+#17 5.218 Compiling routine KafkaBank.Trans.1
+#17 5.239 Compiling routine KafkaBank.Stream.Production.ProcessTransactions.1
+#17 5.511 Compiling class KafkaBank.Cubes.BankTrans
+#17 5.526 Compiling routine KafkaBank.Cubes.BankTrans.1
+#17 5.572 Compiling class KafkaBank.Cubes.BankTrans.Listing
+#17 5.594 Compiling class KafkaBank.Cubes.BankTrans.Stardob
+#17 5.595 Compiling class KafkaBank.Cubes.BankTrans.Starcity
+#17 5.610 Compiling class KafkaBank.Cubes.BankTrans.Starfirst
+#17 5.612 Compiling class KafkaBank.Cubes.BankTrans.Starcategory
+#17 5.615 Compiling class KafkaBank.Cubes.BankTrans.Starccnum
+#17 5.630 Compiling class KafkaBank.Cubes.BankTrans.Stargender
+#17 5.632 Compiling class KafkaBank.Cubes.BankTrans.Starisfraud
+#17 5.652 Compiling class KafkaBank.Cubes.BankTrans.Starjob
+#17 5.669 Compiling class KafkaBank.Cubes.BankTrans.Starlast
+#17 5.671 Compiling class KafkaBank.Cubes.BankTrans.Starstate
+#17 5.671 Compiling class KafkaBank.Cubes.BankTrans.Starstreet
+#17 5.677 Compiling class KafkaBank.Cubes.BankTrans.Fact
+#17 5.678 Compiling class KafkaBank.Cubes.BankTrans.Starmerchant
+#17 5.687 Compiling class KafkaBank.Cubes.BankTrans.Startransdatetime
+#17 5.705 Compiling class KafkaBank.Cubes.BankTrans.Starzip
+#17 5.725 Compiling table KafkaBank_Cubes_BankTrans.Starcategory
+#17 5.726 Compiling table KafkaBank_Cubes_BankTrans.Listing
+#17 5.729 Compiling table KafkaBank_Cubes_BankTrans.Stardob
+#17 5.729 Compiling table KafkaBank_Cubes_BankTrans.Starfirst
+#17 5.731 Compiling table KafkaBank_Cubes_BankTrans.Starccnum
+#17 5.734 Compiling table KafkaBank_Cubes_BankTrans.Starisfraud
+#17 5.735 Compiling table KafkaBank_Cubes_BankTrans.Starjob
+#17 5.735 Compiling table KafkaBank_Cubes_BankTrans.Stargender
+#17 5.735 Compiling table KafkaBank_Cubes_BankTrans.Fact
+#17 5.736 Compiling table KafkaBank_Cubes_BankTrans.Starcity
+#17 5.737 Compiling table KafkaBank_Cubes_BankTrans.Starlast
+#17 5.740 Compiling table KafkaBank_Cubes_BankTrans.Starmerchant
+#17 5.740 Compiling table KafkaBank_Cubes_BankTrans.Starstate
+#17 5.740 Compiling table KafkaBank_Cubes_BankTrans.Startransdatetime
+#17 5.741 Compiling table KafkaBank_Cubes_BankTrans.Starstreet
+#17 5.743 Compiling table KafkaBank_Cubes_BankTrans.Starzip
+#17 5.794 Compiling routine KafkaBank.Cubes.BankTrans.Listing.1
+#17 5.817 Compiling routine KafkaBank.Cubes.BankTrans.Starccnum.1
+#17 5.818 Compiling routine KafkaBank.Cubes.BankTrans.Stardob.1
+#17 5.842 Compiling routine KafkaBank.Cubes.BankTrans.Starcity.1
+#17 5.852 Compiling routine KafkaBank.Cubes.BankTrans.Starcategory.1
+#17 5.865 Compiling routine KafkaBank.Cubes.BankTrans.Starfirst.1
+#17 5.875 Compiling routine KafkaBank.Cubes.BankTrans.Stargender.1
+#17 5.878 Compiling routine KafkaBank.Cubes.BankTrans.Starisfraud.1
+#17 5.935 Compiling routine KafkaBank.Cubes.BankTrans.Starmerchant.1
+#17 5.941 Compiling routine KafkaBank.Cubes.BankTrans.Starjob.1
+#17 5.942 Compiling routine KafkaBank.Cubes.BankTrans.Starstate.1
+#17 5.946 Compiling routine KafkaBank.Cubes.BankTrans.Starstreet.1
+#17 5.947 Compiling routine KafkaBank.Cubes.BankTrans.Starlast.1
+#17 5.949 Compiling routine KafkaBank.Cubes.BankTrans.Fact.1
+#17 5.997 Compiling routine KafkaBank.Cubes.BankTrans.Startransdatetime.1
+#17 6.005 Compiling routine KafkaBank.Cubes.BankTrans.Starzip.1
+#17 6.012 Compilation finished successfully in 1.116s.
+#17 6.013 
+#17 6.013 Load finished successfully.
+#17 6.014 2022-09-07 16:34:56 3 Evaluate: /csp/${app} -> /csp/kafka
+#17 6.014 2022-09-07 16:34:56 3 Evaluate: ${cspdir}${app} -> kafka
+#17 6.014 2022-09-07 16:34:56 3 Evaluate:  -> 
+#17 6.015 2022-09-07 16:34:56 3 Evaluate: 32 -> 32
+#17 6.015 2022-09-07 16:34:56 3 Evaluate: 1 -> 1
+#17 6.015 2022-09-07 16:34:56 3 Evaluate:  -> 
+#17 6.016 2022-09-07 16:34:56 3 Evaluate:  -> 
+#17 6.016 2022-09-07 16:34:56 3 Evaluate:  -> 
+#17 6.016 2022-09-07 16:34:56 3 Evaluate:  -> 
+#17 6.016 2022-09-07 16:34:56 3 Evaluate: 1 -> 1
+#17 6.017 2022-09-07 16:34:56 3 Evaluate:  -> 
+#17 6.017 2022-09-07 16:34:56 3 Evaluate:  -> 
+#17 6.017 2022-09-07 16:34:56 3 Evaluate:  -> 
+#17 6.017 2022-09-07 16:34:56 3 Evaluate:  -> 
+#17 6.017 2022-09-07 16:34:56 3 Evaluate:  -> 
+#17 6.017 2022-09-07 16:34:56 3 Evaluate: 1 -> 1
+#17 6.018 2022-09-07 16:34:56 3 Evaluate: 1 -> 1
+#17 6.018 2022-09-07 16:34:56 3 Evaluate: 0 -> 0
+#17 6.018 2022-09-07 16:34:56 3 Evaluate: 0 -> 0
+#17 6.018 2022-09-07 16:34:56 3 Evaluate:  -> 
+#17 6.018 2022-09-07 16:34:56 3 Evaluate: 1 -> 1
+#17 6.018 2022-09-07 16:34:56 3 Evaluate:  -> 
+#17 6.018 2022-09-07 16:34:56 3 Evaluate: :%DB_${Namespace} -> :%DB_KAFKABANK
+#17 6.018 2022-09-07 16:34:56 3 Evaluate:  -> 
+#17 6.018 2022-09-07 16:34:56 1 CSPApplication: Creating /csp/kafka in KAFKABANK, using kafka
+#17 6.020 2022-09-07 16:34:56 0 App.Installer: Installation succeeded at 2022-09-07 16:34:56
+#17 6.020 2022-09-07 16:34:56 0 %Installer: Elapsed time 2.655057s
+#17 6.020 
+#17 6.020 USER>
+#17 6.021 
+#17 6.021 USER 1S1>
+#17 6.021 
+#17 6.021 USER 1S1>
+#17 6.021 
+#17 6.021 KAFKABANK 1S1>
+#17 6.021 
+#17 6.021 KAFKABANK 1S1>
+#17 6.021 
+#17 6.021 KAFKABANK 1S1>
+#17 6.191 
+#17 6.191 Building cube [BankTrans]
+#17 6.191 Deleting existing cube...[0JExisting cube deleted.
+#17 6.240 [0JBuilding fact table:              0 fact(s) updated.  100% tasks complete[0JFact table built:                 0 fact(s) (1 worker(s) used)
+#17 6.240 [0JBuilding indices...          0 fact(s) processed. 100% tasks complete[0JFact indices built:               0 fact(s) (0 worker(s) used)
+#17 6.241 [0JProcessing iKnow Indices...[0J
+#17 6.243 [0JComplete
+#17 6.244 Elapsed time:                  0.049941s
+#17 6.244 Source expression time:        0.000000s
+#17 6.401 
+#17 6.401 KAFKABANK 1S1>
+#17 6.401 
+#17 6.401 KAFKABANK 1S1>
+#17 6.401 
+#17 6.401 KAFKABANK 1S1>
+#17 6.401 
+#17 6.401 KAFKABANK 1S1>
+#17 6.422 Replacing: KafkaBank/FraudFilter.pivotReplacing: KafkaBank/FraudFilterListing.pivotReplacing: KafkaBank/TransactionsDashboard.dashboard
+#17 6.426 KAFKABANK 1S1>
+#17 6.426 
+#17 6.426 KAFKABANK 1S1>
+#17 6.426 
+#17 6.426 KAFKABANK 1S1>
+#17 6.426 
+#17 6.426 KAFKABANK 1S1>
+#17 6.426 
+#17 6.426 %SYS 1S1>
+#17 6.462 
+#17 6.462 %SYS 1S1>
+#17 6.462 
+#17 6.462 %SYS 1S1>
+#17 DONE 6.5s
+
+#18 exporting to image
+#18 exporting layers
+#18 exporting layers 3.6s done
+#18 writing image sha256:f55dd2f87833d4c4baf1c3fb372b553a085101aa152fc3284bb2e9845ff92ae1 done
+#18 naming to docker.io/library/kafka-streaming-analytics-iris done
+#18 DONE 3.6s
