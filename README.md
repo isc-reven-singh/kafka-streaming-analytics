@@ -108,5 +108,5 @@ and generate credit card transaction events, one line at a time. After each even
 ----------------------------------------------
 Open the [Fraudulent Transaction Dashboard](http://localhost:52773/csp/kafkabank/_DeepSee.UserPortal.DashboardViewer.zen?DASHBOARD=KafkaBank/TransactionsDashboard.dashboard) to view, in near real-time, a count of all transactions suspected to be fraudulent, seperated by State.
 
-Explore the [Transaction cube](http://localhost:52773/csp/kafkabank/_DeepSee.UI.Analyzer.zen?$NAMESPACE=KAFKABANK&PIVOT=KafkaBank%2FFraudFilter.pivot]) further, and build your own pivots and dashboards.
+Explore the [Transaction cube](http://localhost:52773/csp/kafkabank/_DeepSee.UI.Analyzer.zen?$NAMESPACE=KAFKABANK&PIVOT=KafkaBank%2FFraudFilter.pivot) further, and build your own pivots and dashboards.
 
