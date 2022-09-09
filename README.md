@@ -30,3 +30,5 @@ $ docker-compose up -d
 Open [InterSystems IRIS Management Portal](http://localhost:52773/csp/sys/UtilHome.csp) on your browser.
 
 The default account _SYSTEM / SYS will need to be changed at first login.
+
+[KafkaBank.Stream.Production](http://localhost:52773/csp/kafkabank/EnsPortal.ProductionConfig.zen?PRODUCTION=KafkaBank.Stream.Production)
