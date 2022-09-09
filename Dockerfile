@@ -32,6 +32,7 @@ USER ${ISC_PACKAGE_MGRUSER}
 RUN iris start IRIS \
 	&& iris session IRIS < /tmp/iris.script
 
+
 ENV PATH=${PATH}:/kafka/kafka_2.13-3.0.1/bin
 
 
