@@ -26,13 +26,6 @@ $ docker-compose up -d
 ```
 
 ## How to Use it
-### Start the InterSystems IRIS Production
-------------------------------------------
-Open [InterSystems IRIS Management Portal](http://localhost:52773/csp/sys/UtilHome.csp) on your browser.
-
-The default account _SYSTEM / SYS will need to be changed at first login.
-
-[KafkaBank.Stream.Production](http://localhost:52773/csp/kafkabank/EnsPortal.ProductionConfig.zen?PRODUCTION=KafkaBank.Stream.Production)
 
 ### Start Kafka
 ----------------------
@@ -81,3 +74,13 @@ Consume events from a topic
 ```
 bin/kafka-console-consumer.sh --topic agentworklist --bootstrap-server localhost:9092
 ```
+
+### Start the InterSystems IRIS Production
+------------------------------------------
+Open [InterSystems IRIS Management Portal](http://localhost:52773/csp/sys/UtilHome.csp) on your browser.
+
+The default account _SYSTEM / SYS will need to be changed at first login.
+
+Start the Production [KafkaBank.Stream.Production](http://localhost:52773/csp/kafkabank/EnsPortal.ProductionConfig.zen?PRODUCTION=KafkaBank.Stream.Production) by clicking the "Start" button.
+
+This Production consumes messages from the _"cctransactions"_ topic, processes the message and produces an output to the _"agentworklist"_ topic.
