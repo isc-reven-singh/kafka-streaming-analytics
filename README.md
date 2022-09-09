@@ -27,8 +27,57 @@ $ docker-compose up -d
 
 ## How to Use it
 ### Start the InterSystems IRIS Production
+------------------------------------------
 Open [InterSystems IRIS Management Portal](http://localhost:52773/csp/sys/UtilHome.csp) on your browser.
 
 The default account _SYSTEM / SYS will need to be changed at first login.
 
 [KafkaBank.Stream.Production](http://localhost:52773/csp/kafkabank/EnsPortal.ProductionConfig.zen?PRODUCTION=KafkaBank.Stream.Production)
+
+### Start Kafka
+----------------------
+#### EXECUTE 4x CONTAINER SHELLS:
+
+- Shell 1 : Start Zookeeper
+- Shell 2 : Start Kafka Broker
+- Shell 3 : Create Topics and produce events
+- Shell 4 : Consume events
+
+
+```
+docker-compose exec iris bash
+```
+
+#### START THE KAFKA ENVIRONMENT
+##### Shell 1 
+Start Zookeeper
+```
+zookeeper-server-start.sh /kafka/kafka_2.13-3.0.1/config/zookeeper.properties
+```
+##### Shell 2 
+Start Kafka Broker
+```
+kafka-server-start.sh /kafka/kafka_2.13-3.0.1/config/server.properties
+```
+##### Shell 3 
+Create a topic for incoming credit card transactions
+```
+kafka-topics.sh --create --topic cctransactions --bootstrap-server localhost:9092
+```
+Create a topic for notifications of transaction that have been processed
+```
+kafka-topics.sh --create --topic agentworklist --bootstrap-server localhost:9092
+```
+Describe a topic
+```
+kafka-topics.sh --describe --topic cctransactions --bootstrap-server localhost:9092
+```
+Produce events to the topic
+```
+kafka-console-producer.sh --topic cctransactions --bootstrap-server localhost:9092
+```
+##### Shell 4 
+Consume events from a topic
+```
+bin/kafka-console-consumer.sh --topic agentworklist --bootstrap-server localhost:9092
+```
