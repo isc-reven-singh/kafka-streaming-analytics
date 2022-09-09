@@ -23,3 +23,9 @@ Run the IRIS container with your project:
 
 ```
 $ docker-compose up -d
+
+## How to Use it
+### Start the InterSystems IRIS Production
+Open [InterSystems IRIS Management Portal](http://localhost:52773/csp/sys/UtilHome.csp) on your browser.
+
+The default account _SYSTEM / SYS will need to be changed at first login.
