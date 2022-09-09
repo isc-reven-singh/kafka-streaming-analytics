@@ -104,3 +104,9 @@ and generate credit card transaction events, one line at a time. After each even
 ```
 { "transdatetime": "2019-01-01 00:01:16", "cc_num": "3534093764340240", "merchant": "fraud_Kutch, Hermiston and Farrell", "category": "gas_transport", "amt": 45, "first": "Jeremy", "last": "White", "gender": "M", "street": "9443 Cynthia Court Apt. 038", "city": "Boulder", "state": "MT", "zip": "59632", "lat": 46.2306, "long": -112.1138, "city_pop": 1939, "job": "Patent attorney", "dob": "1967-01-12", "trans_num": "6b849c168bdad6f867558c3793159a81", "unix_time": "1325376076", "merch_lat": 47.034331, "merch_long": -112.561071, "is_fraud": true }
 ```
+### View the Fraudulent Transaction Dashboard
+----------------------------------------------
+Open the (Fraudulent Transaction Dashboard)http://localhost:52773/csp/kafkabank/_DeepSee.UserPortal.DashboardViewer.zen?DASHBOARD=KafkaBank/TransactionsDashboard.dashboard to view, in near real-time, a count of all transactions suspected to be fraudulent, seperated by State.
+
+Explore the (Transaction cube)http://localhost:52773/csp/kafkabank/_DeepSee.UI.Analyzer.zen?$NAMESPACE=KAFKABANK&PIVOT=KafkaBank%2FFraudFilter.pivot further, and build your own pivots and dashboards.
+http://localhost:52773/csp/kafkabank/_DeepSee.UI.Analyzer.zen?$NAMESPACE=KAFKABANK&PIVOT=KafkaBank%2FFraudFilter.pivot
