@@ -4,6 +4,10 @@ A demonstration of how to use InterSystems IRIS Data Platform, to consume messag
  ## Prerequisites
  This demo requires that you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [Docker desktop](https://www.docker.com/products/docker-desktop) installed.
  
+ ## Solution
+ 
+ ![/images/architecture.png](https://github.com/isc-reven-singh/kafka-streaming-analytics/blob/main/images/kafka.png)
+ 
  ## Installation 
 
 Clone/git pull the repo into any local directory
